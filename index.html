@@ -97,7 +97,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/04/27/CokeIzBlog/" data-id="cm9zux7nk0000u0ujhjwq3yxg" data-title="CokeIzBlog" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/04/27/CokeIzBlog/" data-id="cma5hqjx1000020uj4cs426vd" data-title="CokeIzBlog" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -148,10 +148,154 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/04/27/hello-world/" data-id="cm9zux7nn0001u0ujeubeajn2" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/04/27/hello-world/" data-id="cma5hqjx5000220uj8u7q5qzu" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-面向对象基础 " class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/04/26/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80%20/" class="article-date">
+  <time class="dt-published" datetime="2025-04-26T10:19:00.000Z" itemprop="datePublished">2025-04-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/04/26/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80%20/">Python 笔记：面向对象基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="面向对象基础"><a href="#面向对象基础" class="headerlink" title="面向对象基础"></a>面向对象基础</h1><h2 id="1-面向对象"><a href="#1-面向对象" class="headerlink" title="1 面向对象"></a>1 面向对象</h2><h3 id="1-1面向过程和面向对象"><a href="#1-1面向过程和面向对象" class="headerlink" title="1.1面向过程和面向对象"></a>1.1面向过程和面向对象</h3><ul>
+<li>编程思想<ul>
+<li>写代码的思维方法</li>
+<li>非两类：面向过程和面向对象</li>
+</ul>
+</li>
+<li>面向过程：面向每个步骤进行编写代码</li>
+<li>面向对象：抽象类（属性和方法）来模拟现实世界</li>
+</ul>
+<h3 id="1-2-面向对象的三大特性"><a href="#1-2-面向对象的三大特性" class="headerlink" title="1.2 面向对象的三大特性"></a>1.2 面向对象的三大特性</h3><ul>
+<li>封装、继承、多态</li>
+<li>封装：在面向对象中，封装就是隐藏对象的属性和实现细节，仅对外公开接口，控制在程序中属性的读和修改的访问级别【公有、私有】，将抽象得到的数据和行为（或功能）相结合，<strong>形成一个有机的整体【类】</strong>，也就是将数据与操作数据的源代码进行有机的结合，形成”<strong>类</strong>“，其中数据和函数都是类的成员。</li>
+<li>继承：在现实生活中，继承一般指的是子女继承父辈的财产，如”<strong>子承父业</strong>“等。只要是继承关系，那么都满足：is-a关系。  子类是父类。</li>
+<li>多态：是指不同类的对象对同一消息做出响应，即同一消息可以根据发送对象的不同而采用多种不同的行为方式</li>
+</ul>
+<h2 id="2-面向对象的基本概念"><a href="#2-面向对象的基本概念" class="headerlink" title="2 面向对象的基本概念"></a>2 面向对象的基本概念</h2><h3 id="2-1-类"><a href="#2-1-类" class="headerlink" title="2.1 类"></a>2.1 类</h3><ul>
+<li>类是对现实物体的抽象，是面向对象的基本语法</li>
+<li>格式：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">类名</span>:</span><br><span class="line">    <span class="comment"># 定义方法</span></span><br><span class="line">    方法列表...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1.定义类:class 类名:</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Car</span>:</span><br><span class="line">    <span class="comment"># 2.定义方法:跑起来</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;能跑起来...&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-对象"><a href="#2-2-对象" class="headerlink" title="2.2 对象"></a>2.2 对象</h3><ul>
+<li>对象是现实世界的一切物体，</li>
+<li>创建对象的语法格式如下：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象名 = 类名()    <span class="comment"># 创建对象</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>可通过对象名.方法来调用方法，如下：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">对象名.方法名()		<span class="comment">#调用方法</span></span><br><span class="line"><span class="comment"># 例如：</span></span><br><span class="line"><span class="comment"># 1.定义类:class 类名:</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Car</span>:</span><br><span class="line">    <span class="comment"># 1.1.定义方法:跑起来</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;能跑起来...&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.创建对象:对象名 = 类名()</span></span><br><span class="line">car = Car()</span><br><span class="line"><span class="comment"># 3.调用方法:对象.方法名()</span></span><br><span class="line">car.run()</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-self-关键字"><a href="#2-3-self-关键字" class="headerlink" title="2.3 self 关键字"></a>2.3 self 关键字</h3><ul>
+<li>self关键字<ul>
+<li>为什么需要self关键字<ul>
+<li>类和对象的关系1：N ，为了区分那个对象调用了类的方法，引入了self。</li>
+<li>谁调用run函数。self就是谁</li>
+</ul>
+</li>
+<li>self关键字的作用：<ul>
+<li>在类的内部，调用类的方法 self.work()</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>在类内部调用方法:一般用在私有方法上</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.定义类:类名使用大驼峰方式命名</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Car</span>():</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;能跑起来...&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 在类内部调用方法:对象名.方法名()-&gt;self.方法名()</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">work</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.run()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.定义对象:对象名一般小驼峰命名</span></span><br><span class="line">car = Car()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.调用方法:对象名.方法名()</span></span><br><span class="line">car.work()</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-添加和获取对象属性"><a href="#3-添加和获取对象属性" class="headerlink" title="3  添加和获取对象属性"></a>3  添加和获取对象属性</h2><h3 id="3-1-什么是属性"><a href="#3-1-什么是属性" class="headerlink" title="3.1 什么是属性"></a>3.1 什么是属性</h3><ul>
+<li>属性即是特征，比如：人的姓名、年龄、身高、体重…都是对象的属性</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在类的内部： <span class="variable language_">self</span>.属性</span><br><span class="line">在类的外部： 对象.属性</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-添加属性"><a href="#3-2-添加属性" class="headerlink" title="3.2 添加属性"></a>3.2 添加属性</h3><ul>
+<li>类外部(其他)<ul>
+<li>对象名.属性名 &#x3D; 属性值</li>
+</ul>
+</li>
+<li>类内部(初始化)<ul>
+<li>在init魔法方法中,使用</li>
+<li>self.属性名 &#x3D; 属性值</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-3-获取属性-在设置属性之后在进行获取"><a href="#3-3-获取属性-在设置属性之后在进行获取" class="headerlink" title="3.3 获取属性(在设置属性之后在进行获取)"></a>3.3 获取属性(在设置属性之后在进行获取)</h3><ul>
+<li>类外部<ul>
+<li>对象名.属性名</li>
+</ul>
+</li>
+<li>类内部<ul>
+<li>self.属性名</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-魔法方法"><a href="#4-魔法方法" class="headerlink" title="4 魔法方法"></a>4 魔法方法</h2><h3 id="4-1-概念"><a href="#4-1-概念" class="headerlink" title="4.1 概念"></a>4.1 概念</h3><p>在特殊情况下会被自动调用，不需要开发者手动去调用。</p>
+<p>对于这些魔法方法，都有一个共同的特性，那就是它们总是被双下划线所包围，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">__魔法方法名__()</span><br><span class="line">__init__()</span><br><span class="line">__str__()</span><br><span class="line">__del__()</span><br></pre></td></tr></table></figure>
+
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class 类名:</span><br><span class="line">	def __魔法方法名__(self[,xxx,xxx]):</span><br><span class="line">		代码</span><br><span class="line">		...</span><br><span class="line">	# ...</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-总结"><a href="#4-2-总结" class="headerlink" title="4.2 总结"></a>4.2 总结</h3><p>魔法方法: 与普通方法区别</p>
+<ul>
+<li>自动调用,特殊情况下</li>
+<li>前后被双下滑线包围</li>
+</ul>
+<p>init方法:创建对象时自动调用,用来对对象属性进行赋值</p>
+<ul>
+<li>无参(self):在类内部进行属性值的确定</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 无参</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Car</span>:</span><br><span class="line">    <span class="comment"># 1.1 属性的设置</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.color = <span class="string">&#x27;红色&#x27;</span></span><br><span class="line">        <span class="variable language_">self</span>.number = <span class="number">4</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 1.2 str:输出属性信息</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__str__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># return f&#x27;&#123;self.color&#125;的汽车有&#123;self.number&#125;个车轮&#x27;</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;self.color&#125;</span>的汽车有<span class="subst">&#123;self.number&#125;</span>个车轮&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.创建对象</span></span><br><span class="line">car = Car()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.打印对象</span></span><br><span class="line"><span class="built_in">print</span>(car)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>有参: 通过类外部实现属性值的设置</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Car</span>:</span><br><span class="line">    <span class="comment"># 1.1 属性赋值</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,color</span>):</span><br><span class="line">        <span class="variable language_">self</span>.color = color</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 1.2 del魔法</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__del__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;自动调用了del魔法方法&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.创建对象</span></span><br><span class="line">car = Car(<span class="string">&#x27;红色&#x27;</span>)</span><br><span class="line"><span class="comment"># 3.获取属性</span></span><br><span class="line"><span class="comment"># print(car.color)</span></span><br><span class="line"><span class="keyword">del</span> car</span><br><span class="line"><span class="built_in">print</span>(car.color)</span><br></pre></td></tr></table></figure>
+
+<p>str方法:print(对象)是自动调用,直接输出str方法，并用return返回的结果</p>
+<p>del方法:删除对象时自动调用(开发时很少用)</p>
+<h2 id="5-练习"><a href="#5-练习" class="headerlink" title="5 练习"></a>5 练习</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/04/26/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80%20/" data-id="cma5hqjx4000120uj49ei7rq0" data-title="Python 笔记：面向对象基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li></ul>
+
     </footer>
   </div>
   
@@ -167,12 +311,33 @@
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">笔记</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">编程</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -196,6 +361,10 @@
         
           <li>
             <a href="/2025/04/27/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/26/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80%20/">Python 笔记：面向对象基础</a>
           </li>
         
       </ul>
