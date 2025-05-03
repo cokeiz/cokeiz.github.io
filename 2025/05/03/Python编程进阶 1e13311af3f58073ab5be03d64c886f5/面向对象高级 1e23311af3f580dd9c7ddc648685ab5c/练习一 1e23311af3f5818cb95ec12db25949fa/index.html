@@ -4,21 +4,23 @@
   <meta charset="utf-8">
   
   
-  <title>Hexo</title>
+  <title>面向对象高级 | Coke&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="练习一01.py  123456789101112131415161718192021222324252627282930&quot;&quot;&quot;- 1.创建一个Animal（动物）基类，其中有一个run方法，输出&#96;跑起来....&#96;；- 2.创建一个Horse（马）类继承于动物类，Horse类中不仅有run()方法还有eat()方法；- 2.1run方法输出 &#96;跑起来....&#96;- 2.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="面向对象高级">
 <meta property="og:url" content="http://example.com/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/%E7%BB%83%E4%B9%A0%E4%B8%80%201e23311af3f5818cb95ec12db25949fa/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Coke&#39;s Blog">
 <meta property="og:description" content="练习一01.py  123456789101112131415161718192021222324252627282930&quot;&quot;&quot;- 1.创建一个Animal（动物）基类，其中有一个run方法，输出&#96;跑起来....&#96;；- 2.创建一个Horse（马）类继承于动物类，Horse类中不仅有run()方法还有eat()方法；- 2.1run方法输出 &#96;跑起来....&#96;- 2.">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-05-03T11:26:18.136Z">
-<meta property="article:modified_time" content="2025-05-03T03:18:46.000Z">
-<meta property="article:author" content="John Doe">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-05-03T05:00:00.000Z">
+<meta property="article:modified_time" content="2025-05-03T12:53:48.583Z">
+<meta property="article:author" content="cokeiz">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="面向对象">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Coke's Blog" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -45,8 +47,12 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">Coke&#39;s Blog</a>
       </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">人生苦短，我用python</a>
+        </h2>
       
     </div>
     <div id="header-inner" class="inner">
@@ -61,12 +67,12 @@
       <nav id="sub-nav">
         
         
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
         
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
       </div>
     </div>
   </div>
@@ -76,12 +82,26 @@
         <section id="main"><article id="post-Python编程进阶 1e13311af3f58073ab5be03d64c886f5/面向对象高级 1e23311af3f580dd9c7ddc648685ab5c/练习一 1e23311af3f5818cb95ec12db25949fa" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/%E7%BB%83%E4%B9%A0%E4%B8%80%201e23311af3f5818cb95ec12db25949fa/" class="article-date">
-  <time class="dt-published" datetime="2025-05-03T11:26:18.136Z" itemprop="datePublished">2025-05-03</time>
+  <time class="dt-published" datetime="2025-05-03T05:00:00.000Z" itemprop="datePublished">2025-05-03</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6/">Python编程进阶</a>►<a class="article-category-link" href="/categories/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7/">面向对象高级</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      面向对象高级
+    </h1>
+  
+
+      </header>
     
     <div class="e-content article-entry" itemprop="articleBody">
       
@@ -91,10 +111,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/%E7%BB%83%E4%B9%A0%E4%B8%80%201e23311af3f5818cb95ec12db25949fa/" data-id="cma852j3j000pg0uj9wg406d2" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/%E7%BB%83%E4%B9%A0%E4%B8%80%201e23311af3f5818cb95ec12db25949fa/" data-id="cma896mk80029g0uj8yxzdsdt" data-title="面向对象高级" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">面向对象</a></li></ul>
+
     </footer>
   </div>
   
@@ -102,18 +124,18 @@
 <nav id="article-nav">
   
     <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/%E7%BB%83%E4%B9%A0%E4%B8%89%201e23311af3f58193af24f9aebd0bad69/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">前一篇</strong>
       <div class="article-nav-title">
         
-          (no title)
+          面向对象高级
         
       </div>
     </a>
   
   
-    <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80%201e13311af3f5806b9689ed5ffdc7dbf8/%E7%BB%83%E4%B9%A0%E5%9B%9B%201e13311af3f581878974e24d51437bec/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title"></div>
+    <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/%E7%BB%83%E4%B9%A0%E4%BA%8C%201e23311af3f5814091d8eff5d0c29d34/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">面向对象高级</div>
     </a>
   
 </nav>
@@ -127,18 +149,10 @@
           <aside id="sidebar">
   
     
-
-  
-    
-
-  
-    
-  
-    
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">April 2025</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6/">Python编程进阶</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6/python%E9%AB%98%E7%BA%A7%E8%AF%AD%E6%B3%95%E4%B8%8E%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">python高级语法与正则表达式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6/%E5%A4%9A%E4%BB%BB%E5%8A%A1%E7%BC%96%E7%A8%8B/">多任务编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6/%E9%97%AD%E5%8C%85%E8%A3%85%E9%A5%B0%E5%99%A8/">闭包装饰器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/">面向对象基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7/">面向对象高级</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/cat1/">cat1</a></li></ul>
     </div>
   </div>
 
@@ -146,28 +160,57 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tag1/" rel="tag">tag1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">面向对象</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/tag1/" style="font-size: 10px;">tag1</a> <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" style="font-size: 20px;">面向对象</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/%E7%BB%83%E4%B9%A0%E5%9B%9B%201e23311af3f581d0875fd5a44def8b9f/">(no title)</a>
+            <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E5%A4%9A%E4%BB%BB%E5%8A%A1%E7%BC%96%E7%A8%8B%201e73311af3f580bb8341ed57864abbc3/">多任务编程</a>
           </li>
         
           <li>
-            <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/%E7%BB%83%E4%B9%A0%E5%85%AD%201e23311af3f581aa99e4c16302a83ab7/">(no title)</a>
+            <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/python%E9%AB%98%E7%BA%A7%E8%AF%AD%E6%B3%95%E4%B8%8E%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%201e83311af3f580999130d55fc649c8b7/">python高级语法与正则表达式</a>
           </li>
         
           <li>
-            <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/%E7%BB%83%E4%B9%A0%E4%BA%94%201e23311af3f581f9977ccc657fab8b6e/">(no title)</a>
+            <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%201e63311af3f580cfb0d8d03a5987b2e4/">网络编程</a>
           </li>
         
           <li>
-            <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/%E7%BB%83%E4%B9%A0%E4%BA%8C%201e23311af3f5814091d8eff5d0c29d34/">(no title)</a>
+            <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%97%AD%E5%8C%85%E8%A3%85%E9%A5%B0%E5%99%A8%201e63311af3f580e081d4e293f50d790d/">闭包装饰器</a>
           </li>
         
           <li>
-            <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/%E7%BB%83%E4%B9%A0%E4%B8%89%201e23311af3f58193af24f9aebd0bad69/">(no title)</a>
+            <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80%201e13311af3f5806b9689ed5ffdc7dbf8/">面向对象基础</a>
           </li>
         
       </ul>
@@ -183,7 +226,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2025 John Doe<br>
+      &copy; 2025 cokeiz<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
