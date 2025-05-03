@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="闭包装饰器1. 函数1.1 函数名的作用 函数名存放的是函数所在内存空间的地址 函数名() 执行函数名所存放空间地址中的代码 函数名可以像普通变量一样赋值,赋值后的结果与原函数名作用是一样的  123456789101112131415# 1.定义函数def func():    print(&#x27;这是一个函数&#x27;)# 2.查看函数的作用# func()# 2.1 函数名print(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%97%AD%E5%8C%85%E8%A3%85%E9%A5%B0%E5%99%A8%201e63311af3f580e081d4e293f50d790d/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="闭包装饰器1. 函数1.1 函数名的作用 函数名存放的是函数所在内存空间的地址 函数名() 执行函数名所存放空间地址中的代码 函数名可以像普通变量一样赋值,赋值后的结果与原函数名作用是一样的  123456789101112131415# 1.定义函数def func():    print(&#x27;这是一个函数&#x27;)# 2.查看函数的作用# func()# 2.1 函数名print(">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-03T11:26:18.061Z">
+<meta property="article:modified_time" content="2025-05-03T03:18:46.000Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Python编程进阶 1e13311af3f58073ab5be03d64c886f5/闭包装饰器 1e63311af3f580e081d4e293f50d790d" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%97%AD%E5%8C%85%E8%A3%85%E9%A5%B0%E5%99%A8%201e63311af3f580e081d4e293f50d790d/" class="article-date">
+  <time class="dt-published" datetime="2025-05-03T11:26:18.061Z" itemprop="datePublished">2025-05-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="闭包装饰器"><a href="#闭包装饰器" class="headerlink" title="闭包装饰器"></a>闭包装饰器</h1><h2 id="1-函数"><a href="#1-函数" class="headerlink" title="1. 函数"></a>1. 函数</h2><h3 id="1-1-函数名的作用"><a href="#1-1-函数名的作用" class="headerlink" title="1.1 函数名的作用"></a>1.1 函数名的作用</h3><ul>
+<li>函数名存放的是函数所在内存空间的地址</li>
+<li>函数名() 执行函数名所存放空间地址中的代码</li>
+<li>函数名可以像普通变量一样赋值,赋值后的结果与原函数名作用是一样的</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.定义函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;这是一个函数&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.查看函数的作用</span></span><br><span class="line"><span class="comment"># func()</span></span><br><span class="line"><span class="comment"># 2.1 函数名</span></span><br><span class="line"><span class="built_in">print</span>(func)</span><br><span class="line"><span class="comment"># 2.2 调用函数</span></span><br><span class="line">func()</span><br><span class="line"><span class="comment"># 2.3 函数名可以像其他一样赋值</span></span><br><span class="line">func2 = func</span><br><span class="line"><span class="built_in">print</span>(func2)</span><br><span class="line"><span class="comment"># 2.4 变量执行函数</span></span><br><span class="line">func2()</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-函数作为参数传递"><a href="#1-2-函数作为参数传递" class="headerlink" title="1.2 函数作为参数传递"></a>1.2 函数作为参数传递</h3><ul>
+<li>当把函数名直接作为实参进行传递时，本质上传递的是：对应函数的引用地址值。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.定义函数1</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;这是一个测试函数&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.定义函数2</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">x</span>):</span><br><span class="line">    x()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.调用函数</span></span><br><span class="line"><span class="comment"># test()</span></span><br><span class="line">func(test)</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-闭包"><a href="#2-闭包" class="headerlink" title="2. 闭包"></a>2. 闭包</h2><h3 id="2-1-闭包的作用"><a href="#2-1-闭包的作用" class="headerlink" title="2.1 闭包的作用"></a>2.1 闭包的作用</h3><ul>
+<li><strong>闭包可以保存函数内的变量</strong>，而不会随着调用完函数而被销毁。</li>
+</ul>
+<h3 id="2-2-闭包的语法"><a href="#2-2-闭包的语法" class="headerlink" title="2.2 闭包的语法"></a>2.2 闭包的语法</h3><ul>
+<li>概念：在函数嵌套的前提下，内部函数使用了外部函数的变量，并且外部函数返回了内部函数。</li>
+<li>我们把这个<strong>使用外部函数变量的内部函数称为闭包</strong>。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 外部函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">外部函数名</span>(<span class="params">外部参数</span>):</span><br><span class="line">    <span class="comment"># 内部函数</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">内部函数名</span>(<span class="params">内部参数</span>):</span><br><span class="line">        ...[使用]</span><br><span class="line">    <span class="keyword">return</span> 内部函数名      <span class="comment"># 闭包</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-闭包的使用"><a href="#2-3-闭包的使用" class="headerlink" title="2.3 闭包的使用"></a>2.3 闭包的使用</h3><ul>
+<li>例如，定义一个用于求和的闭包。其中，外部函数有参数x，内部函数有参数y，然后调用，并用于求解两数之和，观察效果。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.函数嵌套:内外部函数(outer,inner)</span></span><br><span class="line"><span class="comment"># 2.有引用:内部函数引用外部函数的变量</span></span><br><span class="line"><span class="comment"># 3.有返回:外部函数要返回内部函数名</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">outer</span>(<span class="params">num1</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">inner</span>(<span class="params">num2</span>):</span><br><span class="line">        <span class="built_in">sum</span> =num2+num1</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;两数之和是<span class="subst">&#123;<span class="built_in">sum</span>&#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用闭包</span></span><br><span class="line">fun =outer(<span class="number">10</span>)</span><br><span class="line">fun(<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-nonlocal关键字"><a href="#2-4-nonlocal关键字" class="headerlink" title="2.4 nonlocal关键字"></a>2.4 nonlocal关键字</h3><ul>
+<li><strong>nonlocal</strong>: 声明能够让内部函数去修改外部函数的变量</li>
+<li>使用：nonlocal 变量名</li>
+<li>例如，编写一个闭包，让内部函数去访问外部函数内的参数a &#x3D; 100，修改值，a &#x3D; a + 1，并观察效果。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.函数嵌套:内外部函数(outer,inner)</span></span><br><span class="line"><span class="comment"># 2.有引用:内部函数引用外部函数的变量</span></span><br><span class="line"><span class="comment"># 3.有返回:外部函数要返回内部函数名</span></span><br><span class="line"><span class="comment"># 4.nonlocal声明后可以使用内部函数修改外部函数的变量</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">outer</span>():</span><br><span class="line">    a = <span class="number">1</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">inner</span>():</span><br><span class="line">        <span class="keyword">nonlocal</span> a     <span class="comment"># 在内部函数中使用</span></span><br><span class="line">        a=a+<span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;a的取值<span class="subst">&#123;a&#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line">f =outer()</span><br><span class="line">f()</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-装饰器基础"><a href="#3-装饰器基础" class="headerlink" title="3. 装饰器基础"></a>3. 装饰器基础</h2><h3 id="3-1-装饰器入门"><a href="#3-1-装饰器入门" class="headerlink" title="3.1 装饰器入门"></a>3.1 装饰器入门</h3><ul>
+<li>装饰器就是<strong>在不改变原有函数的基础上，给原有函数增加额外功能</strong>。</li>
+<li>构成条件：<ul>
+<li><strong>有嵌套</strong>：在函数嵌套(函数里面再定义函数)的前提下；</li>
+<li><strong>有引用</strong>：在内部函数中使用了外部函数中的变量(还包括外部函数的参数)；</li>
+<li><strong>有返回</strong>：外部函数返回内部函数名；</li>
+<li>**有额外功能：**给需要装饰的原有函数增加额外功能。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def outer([外面参数列表]):</span><br><span class="line">	def inner([内部参数列表]):  # 有嵌套</span><br><span class="line">		新增额外功能代码 # 有额外功能</span><br><span class="line">		....</span><br><span class="line">		...[引用] # 有引用</span><br><span class="line">	return inner # 有返回</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用语法1：传统方式</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用语法1:传统方式</span></span><br><span class="line">变量名 = outer([外面参数列表])</span><br><span class="line">变量名([内部参数列表])</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>例如，发表评论前，都是需要先登录的。<br>此处，先定义有发表评论的功能函数，然后在不改变原有函数的基础上，需要提示用户要先登录~。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 发表评论前,要先登录</span></span><br><span class="line"><span class="comment"># 1.定义原有函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">comment</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;发表评论&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.定义装饰器:装饰器名称就是外部函数名</span></span><br><span class="line"><span class="comment"># 2.1 嵌套</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">outer</span>(<span class="params">fn</span>):</span><br><span class="line">    <span class="comment"># 2.2 引用</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">inner</span>():</span><br><span class="line">        <span class="comment"># 2.4 额外功能</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;请先登录...&#x27;</span>)</span><br><span class="line">        fn()</span><br><span class="line">    <span class="comment"># 2.3 返回</span></span><br><span class="line">    <span class="keyword">return</span> inner   <span class="comment"># 注意：没有（）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.装饰原有函数</span></span><br><span class="line">fn =outer(comment)</span><br><span class="line"><span class="comment"># 4.调用</span></span><br><span class="line">fn()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用语法2:语法糖</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用语法2:语法糖</span></span><br><span class="line"><span class="meta">@outer</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">函数名</span>():</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>例如，发表评论前，都是需要先登录的。<br>此处，先定义有发表评论的功能函数，然后在不改变原有函数的基础上，需要提示用户要先登录~。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 发表评论前,要先登录</span></span><br><span class="line"><span class="comment"># 1.定义装饰器:装饰器名称就是外部函数名</span></span><br><span class="line"><span class="comment"># 2.1 嵌套</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">outer</span>(<span class="params">fn</span>):</span><br><span class="line">    <span class="comment"># 2.2 引用</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">inner</span>():</span><br><span class="line">        <span class="comment"># 2.4 额外功能</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;请先登录...&#x27;</span>)</span><br><span class="line">        fn()</span><br><span class="line">    <span class="comment"># 2.3 返回</span></span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.定义原有函数</span></span><br><span class="line"><span class="meta">@outer</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">comment</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;发表评论&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.调用</span></span><br><span class="line">comment()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-装饰器的使用"><a href="#3-2-装饰器的使用" class="headerlink" title="3.2 装饰器的使用"></a>3.2 装饰器的使用</h3><ul>
+<li>无参无返回值的函数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    定义: def 函数名(): ...</span></span><br><span class="line"> <span class="comment">#   调用: 函数名()</span></span><br><span class="line"><span class="comment"># 2.整装饰函数，原函数怎么写，装饰函数的内部函数就怎么写</span></span><br><span class="line"><span class="comment"># 有嵌套</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fun_out</span>(<span class="params">fun</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun_in</span>():</span><br><span class="line">        <span class="comment"># 有额外功能</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;[正在计算中...]&#x27;</span>)</span><br><span class="line">        <span class="comment"># 有引用</span></span><br><span class="line">        fun()</span><br><span class="line">    <span class="comment"># 有返回</span></span><br><span class="line">    <span class="keyword">return</span> fun_in</span><br><span class="line"></span><br><span class="line"><span class="meta">@fun_out</span></span><br><span class="line"><span class="comment"># 1.先整原函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fun_yuan</span>():</span><br><span class="line">    a = <span class="number">10</span></span><br><span class="line">    b = <span class="number">20</span></span><br><span class="line">    c = a + b</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;c--&gt;&#x27;</span>,c)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用函数</span></span><br><span class="line">fun_yuan()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>有参无返回值的函数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    定义: def 函数名(形参): ...</span></span><br><span class="line"><span class="comment">#    调用: 函数名(实参)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fun_out</span>(<span class="params">fun</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun_in</span>(<span class="params">a,b</span>):</span><br><span class="line">        <span class="comment"># 有额外功能</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;[正在计算中...]&#x27;</span>)</span><br><span class="line">        <span class="comment"># 有引用</span></span><br><span class="line">        fun(a,b)</span><br><span class="line">    <span class="comment"># 有返回</span></span><br><span class="line">    <span class="keyword">return</span> fun_in</span><br><span class="line"></span><br><span class="line"><span class="meta">@fun_out</span></span><br><span class="line"><span class="comment"># 1.先整原函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fun_yuan</span>(<span class="params">a,b</span>):</span><br><span class="line">    <span class="comment"># a = 10</span></span><br><span class="line">    <span class="comment"># b = 20</span></span><br><span class="line">    c = a + b</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;c--&gt;&#x27;</span>,c)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用函数</span></span><br><span class="line">fun_yuan(<span class="number">10</span>,<span class="number">30</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>无参有返回的函数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    定义: def 函数名(): ... return 返回值</span></span><br><span class="line"><span class="comment">#    调用: 用变量接收返回值 = 函数名()</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fun_out</span>(<span class="params">fun</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun_in</span>():</span><br><span class="line">        <span class="comment"># 有额外功能</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;[正在计算中...]&#x27;</span>)</span><br><span class="line">        <span class="comment"># 有引用</span></span><br><span class="line">        c = fun()</span><br><span class="line">        <span class="keyword">return</span> c</span><br><span class="line">    <span class="comment"># 有返回</span></span><br><span class="line">    <span class="keyword">return</span> fun_in</span><br><span class="line"></span><br><span class="line"><span class="meta">@fun_out</span></span><br><span class="line"><span class="comment"># 1.先整原函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fun_yuan</span>():</span><br><span class="line">    a = <span class="number">10</span></span><br><span class="line">    b = <span class="number">20</span></span><br><span class="line">    c = a + b</span><br><span class="line">    <span class="keyword">return</span> c</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用函数</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;c--&gt;&#x27;</span>, fun_yuan())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;-&#x27;</span>*<span class="number">30</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>有参有返回的函数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    定义: def 函数名(形参): ... return 返回值</span></span><br><span class="line"><span class="comment">#    调用: 用变量接收返回值 = 函数名(实参)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fun_out</span>(<span class="params">fun</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun_in</span>(<span class="params">a,b</span>):</span><br><span class="line">        <span class="comment"># 额外功能</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;【正在计算...】&#x27;</span>)</span><br><span class="line">        <span class="comment"># 有引用</span></span><br><span class="line">        c = fun(a,b)</span><br><span class="line">        <span class="keyword">return</span> c</span><br><span class="line">    <span class="keyword">return</span> fun_in</span><br><span class="line"></span><br><span class="line"><span class="meta">@fun_out</span></span><br><span class="line"><span class="comment"># 1.先整原函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fun_yuan</span>(<span class="params">a,b</span>):</span><br><span class="line">    c = a + b</span><br><span class="line">    <span class="keyword">return</span> c</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;c--&gt;&#x27;</span>,fun_yuan(<span class="number">10</span>,<span class="number">40</span>))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通用装饰器的使用</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*args: 元组类型</span><br><span class="line">**kwargs: 字典类型</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>例如，定义一个可以计算多个数据和多个字典value值之和的函数，并调用。</p>
+<p>  在原有函数的计算结果之前，加一个友好提示(不能改变源码)：正在努力计算中…。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.定义装饰器</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">outer</span>(<span class="params">fn</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">inner</span>(<span class="params">*args,**kwargs</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;正在努力计算中....&#x27;</span>)</span><br><span class="line">        result = fn(*args,**kwargs)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.定义原有函数</span></span><br><span class="line"><span class="meta">@outer</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_sum</span>(<span class="params">*args, **kwargs</span>):</span><br><span class="line">    <span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> arg <span class="keyword">in</span> args:</span><br><span class="line">        <span class="built_in">sum</span> += arg</span><br><span class="line">    <span class="keyword">for</span> value <span class="keyword">in</span> kwargs.values():</span><br><span class="line">        <span class="built_in">sum</span> += value</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.调用</span></span><br><span class="line">result = get_sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, a=<span class="number">1</span>, b=<span class="number">2</span>, c=<span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-装饰器的进阶"><a href="#4-装饰器的进阶" class="headerlink" title="4. 装饰器的进阶"></a>4. 装饰器的进阶</h2><h3 id="4-1-多个装饰器装饰一个函数"><a href="#4-1-多个装饰器装饰一个函数" class="headerlink" title="4.1 多个装饰器装饰一个函数"></a>4.1 多个装饰器装饰一个函数</h3><ul>
+<li>多个装饰器的<strong>装饰过程</strong>是: 离函数<strong>最近</strong>的装饰器先装饰，然后外面的装饰器再进行装饰，<strong>由内到外</strong>的装饰过程。</li>
+<li>例如，发表评论前，都是需要先登录用户并进行验证码验证。先定义有发表评论的功能函数，然后在<strong>不改变原有函数的基础上</strong>，需要提示用户要先登录和输入验证码</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.定义装饰器</span></span><br><span class="line"><span class="comment"># 1.1 登录的装饰器</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">login</span>(<span class="params">fn</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">inner</span>():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;请登录用户...&#x27;</span>)</span><br><span class="line">        fn()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1.2 验证的装饰器</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check</span>(<span class="params">fn</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">inner</span>():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;请输入验证码...&#x27;</span>)</span><br><span class="line">        fn()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.原有函数    #可以这么记，谁在上面谁的代码的结果就在上面</span></span><br><span class="line"><span class="meta">@login</span></span><br><span class="line"><span class="meta">@check</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">comment</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;发表评论...&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.调用</span></span><br><span class="line">comment()</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-了解-带有参数的装饰器"><a href="#4-2-了解-带有参数的装饰器" class="headerlink" title="4.2[了解]带有参数的装饰器"></a>4.2[了解]带有参数的装饰器</h3><ul>
+<li><p>使用带有参数的装饰器，其实是在装饰器外面又包裹了一个函数，使用该函数接收参数，返回装饰器。</p>
+<p>  例如，定义一个既能装饰减法运算，又能装饰加法运算的装饰器，即带有参数的装饰器：</p>
+<p>  （1）当装饰减法运算时，提示：正在进行减法运算；</p>
+<p>  （2）当装饰加运算时，提示：Adding…。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.装饰器</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">logging</span>(<span class="params">flag</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">outter</span>(<span class="params">fn</span>):</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">inner</span>(<span class="params">a, b</span>):</span><br><span class="line">            <span class="comment"># 额外功能</span></span><br><span class="line">            <span class="keyword">if</span> flag == <span class="string">&quot;+&quot;</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;正在进行加法计算...&#x27;</span>)</span><br><span class="line">            <span class="keyword">elif</span> flag == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;正在进行减法运算....&#x27;</span>)</span><br><span class="line">            z = fn(a, b)</span><br><span class="line">            <span class="keyword">return</span> z</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> outter</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.原有函数</span></span><br><span class="line"><span class="meta">@logging(<span class="params"><span class="string">&#x27;+&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">a, b</span>):</span><br><span class="line">    <span class="built_in">sum</span> = a + b</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@logging(<span class="params"><span class="string">&#x27;-&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">reduce</span>(<span class="params">a, b</span>):</span><br><span class="line">    res = a - b</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.调用</span></span><br><span class="line">result1 = add(<span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line"><span class="built_in">print</span>(result1)</span><br><span class="line">result2 = reduce(<span class="number">20</span>, <span class="number">10</span>)</span><br><span class="line"><span class="built_in">print</span>(result2)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-装饰器的使用-扩展"><a href="#4-3-装饰器的使用-扩展" class="headerlink" title="4.3 装饰器的使用[扩展]"></a>4.3 装饰器的使用[扩展]</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义一个类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.__money = <span class="number">2000</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># def get_money(self):</span></span><br><span class="line">    <span class="comment">#     return self.__money</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># def set_money(self):</span></span><br><span class="line">    <span class="comment">#     self.__money = 5000</span></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">money</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.__money</span><br><span class="line"></span><br><span class="line"><span class="meta">    @money.setter</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">money</span>(<span class="params">self,m</span>):</span><br><span class="line">        <span class="keyword">if</span> m &lt; <span class="number">100</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;这是不可能的&#x27;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="variable language_">self</span>.__money = m</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在类外获取</span></span><br><span class="line">p = Person()</span><br><span class="line"><span class="built_in">print</span>(p.money)</span><br><span class="line">p.money = <span class="number">5000</span></span><br><span class="line"><span class="built_in">print</span>(p.money)</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-练习"><a href="#5-练习" class="headerlink" title="5. 练习"></a>5. 练习</h2><p><a href="%E9%97%AD%E5%8C%85%E8%A3%85%E9%A5%B0%E5%99%A8%201e63311af3f580e081d4e293f50d790d/%E7%BB%83%E4%B9%A0%E4%B8%80%201e63311af3f5815684f6e12610accc5c.md">练习一</a></p>
+<p><a href="%E9%97%AD%E5%8C%85%E8%A3%85%E9%A5%B0%E5%99%A8%201e63311af3f580e081d4e293f50d790d/%E7%BB%83%E4%B9%A0%E4%BA%8C%201e63311af3f581d3923cd892b0675554.md">练习二</a></p>
+<p><a href="%E9%97%AD%E5%8C%85%E8%A3%85%E9%A5%B0%E5%99%A8%201e63311af3f580e081d4e293f50d790d/%E7%BB%83%E4%B9%A0%E4%B8%89%201e63311af3f5817e9645d9870065ad8f.md">练习三</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%97%AD%E5%8C%85%E8%A3%85%E9%A5%B0%E5%99%A8%201e63311af3f580e081d4e293f50d790d/" data-id="cma852j3b0005g0uj6t5385ht" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80%201e13311af3f5806b9689ed5ffdc7dbf8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%201e63311af3f580cfb0d8d03a5987b2e4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">April 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/%E7%BB%83%E4%B9%A0%E5%9B%9B%201e23311af3f581d0875fd5a44def8b9f/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/%E7%BB%83%E4%B9%A0%E5%85%AD%201e23311af3f581aa99e4c16302a83ab7/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/%E7%BB%83%E4%B9%A0%E4%BA%94%201e23311af3f581f9977ccc657fab8b6e/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/%E7%BB%83%E4%B9%A0%E4%BA%8C%201e23311af3f5814091d8eff5d0c29d34/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/%E7%BB%83%E4%B9%A0%E4%B8%89%201e23311af3f58193af24f9aebd0bad69/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
