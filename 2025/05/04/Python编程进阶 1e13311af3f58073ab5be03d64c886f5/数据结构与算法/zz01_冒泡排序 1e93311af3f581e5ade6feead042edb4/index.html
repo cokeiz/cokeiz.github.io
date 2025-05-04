@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="zz01_冒泡排序冒泡排序1 思想: 相邻位置两个元素比较, 前面的元素比后面的元素大则交换, 把最大的数给找到经过一轮一轮的比较最终把序列给排序2 关键点1: 两层for循环 外层循环控制多少轮 内层for循环控制比较次数3 关键点2: 若遍历一遍没有数字交换 说明序列有序,退出本轮4 稳定性: 相邻两元素若相等则不交换,说明能保持原有序列的顺序 所以是算法是稳定的5 算法复杂度: O(n^2)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Coke&#39;s Blog">
+<meta property="og:url" content="http://example.com/2025/05/04/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/zz01_%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%201e93311af3f581e5ade6feead042edb4/index.html">
+<meta property="og:site_name" content="Coke&#39;s Blog">
+<meta property="og:description" content="zz01_冒泡排序冒泡排序1 思想: 相邻位置两个元素比较, 前面的元素比后面的元素大则交换, 把最大的数给找到经过一轮一轮的比较最终把序列给排序2 关键点1: 两层for循环 外层循环控制多少轮 内层for循环控制比较次数3 关键点2: 若遍历一遍没有数字交换 说明序列有序,退出本轮4 稳定性: 相邻两元素若相等则不交换,说明能保持原有序列的顺序 所以是算法是稳定的5 算法复杂度: O(n^2)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-05-04T13:04:23.843Z">
+<meta property="article:modified_time" content="2025-05-04T04:43:52.000Z">
+<meta property="article:author" content="cokeiz">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/05/04/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/zz01_%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%201e93311af3f581e5ade6feead042edb4/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/05/04/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/zz01_%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%201e93311af3f581e5ade6feead042edb4/","path":"2025/05/04/Python编程进阶 1e13311af3f58073ab5be03d64c886f5/数据结构与算法/zz01_冒泡排序 1e93311af3f581e5ade6feead042edb4/","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title> | Coke's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Coke's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人生苦短，我用python</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#zz01-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="nav-number">1.</span> <span class="nav-text">zz01_冒泡排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="nav-number">2.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%80%9D%E6%83%B3-%E7%9B%B8%E9%82%BB%E4%BD%8D%E7%BD%AE%E4%B8%A4%E4%B8%AA%E5%85%83%E7%B4%A0%E6%AF%94%E8%BE%83-%E5%89%8D%E9%9D%A2%E7%9A%84%E5%85%83%E7%B4%A0%E6%AF%94%E5%90%8E%E9%9D%A2%E7%9A%84%E5%85%83%E7%B4%A0%E5%A4%A7%E5%88%99%E4%BA%A4%E6%8D%A2-%E6%8A%8A%E6%9C%80%E5%A4%A7%E7%9A%84%E6%95%B0%E7%BB%99%E6%89%BE%E5%88%B0"><span class="nav-number">3.</span> <span class="nav-text">1 思想: 相邻位置两个元素比较, 前面的元素比后面的元素大则交换, 把最大的数给找到</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%8F%E8%BF%87%E4%B8%80%E8%BD%AE%E4%B8%80%E8%BD%AE%E7%9A%84%E6%AF%94%E8%BE%83%E6%9C%80%E7%BB%88%E6%8A%8A%E5%BA%8F%E5%88%97%E7%BB%99%E6%8E%92%E5%BA%8F"><span class="nav-number">4.</span> <span class="nav-text">经过一轮一轮的比较最终把序列给排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%85%B3%E9%94%AE%E7%82%B91-%E4%B8%A4%E5%B1%82for%E5%BE%AA%E7%8E%AF-%E5%A4%96%E5%B1%82%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6%E5%A4%9A%E5%B0%91%E8%BD%AE-%E5%86%85%E5%B1%82for%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6%E6%AF%94%E8%BE%83%E6%AC%A1%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text">2 关键点1: 两层for循环 外层循环控制多少轮 内层for循环控制比较次数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%85%B3%E9%94%AE%E7%82%B92-%E8%8B%A5%E9%81%8D%E5%8E%86%E4%B8%80%E9%81%8D%E6%B2%A1%E6%9C%89%E6%95%B0%E5%AD%97%E4%BA%A4%E6%8D%A2-%E8%AF%B4%E6%98%8E%E5%BA%8F%E5%88%97%E6%9C%89%E5%BA%8F-%E9%80%80%E5%87%BA%E6%9C%AC%E8%BD%AE"><span class="nav-number">6.</span> <span class="nav-text">3 关键点2: 若遍历一遍没有数字交换 说明序列有序,退出本轮</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E7%A8%B3%E5%AE%9A%E6%80%A7-%E7%9B%B8%E9%82%BB%E4%B8%A4%E5%85%83%E7%B4%A0%E8%8B%A5%E7%9B%B8%E7%AD%89%E5%88%99%E4%B8%8D%E4%BA%A4%E6%8D%A2-%E8%AF%B4%E6%98%8E%E8%83%BD%E4%BF%9D%E6%8C%81%E5%8E%9F%E6%9C%89%E5%BA%8F%E5%88%97%E7%9A%84%E9%A1%BA%E5%BA%8F-%E6%89%80%E4%BB%A5%E6%98%AF%E7%AE%97%E6%B3%95%E6%98%AF%E7%A8%B3%E5%AE%9A%E7%9A%84"><span class="nav-number">7.</span> <span class="nav-text">4 稳定性: 相邻两元素若相等则不交换,说明能保持原有序列的顺序 所以是算法是稳定的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6-O-n-2-%E6%9C%80%E5%B7%AE%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6O-n-2-%E6%9C%80%E4%BC%98%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6O-n"><span class="nav-number">8.</span> <span class="nav-text">5 算法复杂度: O(n^2), 最差时间复杂度O(n^2), 最优时间复杂度O(n)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%92%E6%B3%A1%E4%BB%8E%E5%B0%8F%E5%88%B0%E5%A4%A7%E6%8E%92%E5%BA%8F-%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4"><span class="nav-number">9.</span> <span class="nav-text">冒泡从小到大排序,实现步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%95%B0%E5%88%97%E9%95%BF%E5%BA%A6-n"><span class="nav-number">10.</span> <span class="nav-text">1 数列长度 n</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%A4%96%E5%B1%82%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6-%E8%BD%AE%E6%AC%A1-j-n-1"><span class="nav-number">11.</span> <span class="nav-text">2 外层循环控制 轮次 j &#x2F; n-1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%86%85%E5%B1%82%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6-%E6%AF%94%E8%BE%83%E6%AC%A1%E6%95%B0-%E7%9B%B8%E9%82%BB%E4%BD%8D%E7%BD%AE2%E4%B8%AA%E5%85%83%E7%B4%A0%E6%AF%94%E8%BE%83%E6%AC%A1%E6%95%B0-i-n-j-1"><span class="nav-number">12.</span> <span class="nav-text">3 内层循环控制 比较次数(相邻位置2个元素比较次数) i &#x2F; n-j-1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E8%8B%A5%E9%81%8D%E5%8E%86%E4%B8%80%E9%81%8D%E6%B2%A1%E6%9C%89%E6%95%B0%E5%AD%97%E4%BA%A4%E6%8D%A2-%E8%AF%B4%E6%98%8E%E5%BA%8F%E5%88%97%E6%9C%89%E5%BA%8F-%E9%80%80%E5%87%BA%E6%9C%AC%E8%BD%AE%E6%AC%A1"><span class="nav-number">13.</span> <span class="nav-text">4 若遍历一遍没有数字交换 说明序列有序 退出本轮次</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cokeiz</p>
+  <div class="site-description" itemprop="description">用此来记录我的生活和学习笔记以及学习过程</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/04/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/zz01_%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%201e93311af3f581e5ade6feead042edb4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cokeiz">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coke's Blog">
+      <meta itemprop="description" content="用此来记录我的生活和学习笔记以及学习过程">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Coke's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-05-04 21:04:23 / 修改时间：12:43:52" itemprop="dateCreated datePublished" datetime="2025-05-04T21:04:23+08:00">2025-05-04</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="zz01-冒泡排序"><a href="#zz01-冒泡排序" class="headerlink" title="zz01_冒泡排序"></a>zz01_冒泡排序</h1><h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><h1 id="1-思想-相邻位置两个元素比较-前面的元素比后面的元素大则交换-把最大的数给找到"><a href="#1-思想-相邻位置两个元素比较-前面的元素比后面的元素大则交换-把最大的数给找到" class="headerlink" title="1 思想: 相邻位置两个元素比较, 前面的元素比后面的元素大则交换, 把最大的数给找到"></a>1 思想: 相邻位置两个元素比较, 前面的元素比后面的元素大则交换, 把最大的数给找到</h1><h1 id="经过一轮一轮的比较最终把序列给排序"><a href="#经过一轮一轮的比较最终把序列给排序" class="headerlink" title="经过一轮一轮的比较最终把序列给排序"></a>经过一轮一轮的比较最终把序列给排序</h1><h1 id="2-关键点1-两层for循环-外层循环控制多少轮-内层for循环控制比较次数"><a href="#2-关键点1-两层for循环-外层循环控制多少轮-内层for循环控制比较次数" class="headerlink" title="2 关键点1: 两层for循环 外层循环控制多少轮 内层for循环控制比较次数"></a>2 关键点1: 两层for循环 外层循环控制多少轮 内层for循环控制比较次数</h1><h1 id="3-关键点2-若遍历一遍没有数字交换-说明序列有序-退出本轮"><a href="#3-关键点2-若遍历一遍没有数字交换-说明序列有序-退出本轮" class="headerlink" title="3 关键点2: 若遍历一遍没有数字交换 说明序列有序,退出本轮"></a>3 关键点2: 若遍历一遍没有数字交换 说明序列有序,退出本轮</h1><h1 id="4-稳定性-相邻两元素若相等则不交换-说明能保持原有序列的顺序-所以是算法是稳定的"><a href="#4-稳定性-相邻两元素若相等则不交换-说明能保持原有序列的顺序-所以是算法是稳定的" class="headerlink" title="4 稳定性: 相邻两元素若相等则不交换,说明能保持原有序列的顺序 所以是算法是稳定的"></a>4 稳定性: 相邻两元素若相等则不交换,说明能保持原有序列的顺序 所以是算法是稳定的</h1><h1 id="5-算法复杂度-O-n-2-最差时间复杂度O-n-2-最优时间复杂度O-n"><a href="#5-算法复杂度-O-n-2-最差时间复杂度O-n-2-最优时间复杂度O-n" class="headerlink" title="5 算法复杂度: O(n^2), 最差时间复杂度O(n^2), 最优时间复杂度O(n)"></a>5 算法复杂度: O(n^2), 最差时间复杂度O(n^2), 最优时间复杂度O(n)</h1><h1 id="冒泡从小到大排序-实现步骤"><a href="#冒泡从小到大排序-实现步骤" class="headerlink" title="冒泡从小到大排序,实现步骤"></a>冒泡从小到大排序,实现步骤</h1><h1 id="1-数列长度-n"><a href="#1-数列长度-n" class="headerlink" title="1 数列长度 n"></a>1 数列长度 n</h1><h1 id="2-外层循环控制-轮次-j-n-1"><a href="#2-外层循环控制-轮次-j-n-1" class="headerlink" title="2 外层循环控制 轮次 j &#x2F; n-1"></a>2 外层循环控制 轮次 j &#x2F; n-1</h1><h1 id="3-内层循环控制-比较次数-相邻位置2个元素比较次数-i-n-j-1"><a href="#3-内层循环控制-比较次数-相邻位置2个元素比较次数-i-n-j-1" class="headerlink" title="3 内层循环控制 比较次数(相邻位置2个元素比较次数) i &#x2F; n-j-1"></a>3 内层循环控制 比较次数(相邻位置2个元素比较次数) i &#x2F; n-j-1</h1><h1 id="4-若遍历一遍没有数字交换-说明序列有序-退出本轮次"><a href="#4-若遍历一遍没有数字交换-说明序列有序-退出本轮次" class="headerlink" title="4 若遍历一遍没有数字交换 说明序列有序 退出本轮次"></a>4 若遍历一遍没有数字交换 说明序列有序 退出本轮次</h1><p>def bubble_sort(alist):<br>“““冒泡排序”“”</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 数列的长度</span><br><span class="line">n = len(alist)</span><br><span class="line"></span><br><span class="line"># 外层循环控制 轮次</span><br><span class="line">for j in range(0, n - 1):</span><br><span class="line"></span><br><span class="line">    # 计数</span><br><span class="line">    count = 0</span><br><span class="line"></span><br><span class="line">    # 内层循环控制 比较次数(相邻位置2个元素比较次数)</span><br><span class="line">    for i in range(0, n - j - 1):</span><br><span class="line">        # 比较相邻的两个数字 , 符合要求交换位置</span><br><span class="line">        if alist[i] &gt; alist[i + 1]:</span><br><span class="line">            alist[i], alist[i + 1] = alist[i + 1], alist[i]</span><br><span class="line">            count += 1</span><br><span class="line"></span><br><span class="line">    # 若遍历一遍没有数字交换 说明序列有序 退出本轮次</span><br><span class="line">    if count == 0:</span><br><span class="line">        break</span><br></pre></td></tr></table></figure>
+
+<p>if <strong>name</strong> &#x3D;&#x3D; ‘<strong>main</strong>’:<br>alist &#x3D; [5, 3, 4, 7, 2]<br>bubble_sort(alist)<br>print(alist)</p>
+<p>def bubble_or_selector(alist):<br>n &#x3D; len(alist)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in range(0, n - 1):</span><br><span class="line">    for j in range(i + 1, n):</span><br><span class="line">        if alist[i] &gt; alist[j]:</span><br><span class="line">            alist[i], alist[j] = alist[j], alist[i]</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/05/04/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%201e93311af3f580cfbf8fdb2fe2326411/" rel="prev" title="数据结构与算法">
+                  <i class="fa fa-angle-left"></i> 数据结构与算法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/05/04/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/zz02_%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F%201e93311af3f581c0918cd914714f1440/" rel="next" title="">
+                   <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">cokeiz</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

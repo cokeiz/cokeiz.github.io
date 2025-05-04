@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="本篇在面向对象基础的基础上深化了语法和面向对象的特性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面向对象高级">
+<meta property="og:url" content="http://example.com/2025/04/29/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/index.html">
+<meta property="og:site_name" content="Coke&#39;s Blog">
+<meta property="og:description" content="本篇在面向对象基础的基础上深化了语法和面向对象的特性">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-04-29T10:52:00.000Z">
+<meta property="article:modified_time" content="2025-05-04T12:54:51.510Z">
+<meta property="article:author" content="cokeiz">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="面向对象">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/04/29/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/04/29/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/","path":"2025/04/29/Python编程进阶 1e13311af3f58073ab5be03d64c886f5/面向对象高级 1e23311af3f580dd9c7ddc648685ab5c/","title":"面向对象高级"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>面向对象高级 | Coke's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Coke's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人生苦短，我用python</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7"><span class="nav-number">1.</span> <span class="nav-text">面向对象高级</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%9A%E4%B9%89%E7%B1%BB%E7%9A%84%E8%AF%AD%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">1. 定义类的语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1%E8%AF%AD%E6%B3%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Python%E4%B8%AD%E7%9A%84%E7%BB%A7%E6%89%BF"><span class="nav-number">1.2.</span> <span class="nav-text">2. Python中的继承</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%A6%82%E5%BF%B5"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-%E5%8D%95%E7%BB%A7%E6%89%BF"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2.1 单继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-%E5%A4%9A%E7%BB%A7%E6%89%BF"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.2.2 多继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E5%AD%90%E7%B1%BB%E9%87%8D%E5%86%99%E7%88%B6%E7%B1%BB%E5%90%8C%E5%90%8D%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.3 子类重写父类同名属性和方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E5%AD%90%E7%B1%BB%E8%B0%83%E7%94%A8%E7%88%B6%E7%B1%BB%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.4 子类调用父类的方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Python%E4%B8%AD%E7%9A%84%E5%B0%81%E8%A3%85"><span class="nav-number">1.3.</span> <span class="nav-text">3. Python中的封装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%AE%9A%E4%B9%89%E5%92%8C%E8%8E%B7%E5%8F%96%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 定义和获取私有属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%AE%9A%E4%B9%89%E5%92%8C%E8%8E%B7%E5%8F%96%E7%A7%81%E6%9C%89%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 定义和获取私有方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-python%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81"><span class="nav-number">1.4.</span> <span class="nav-text">4. python中的多态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E5%A4%9A%E6%80%81"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 多态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E8%AF%AD%E8%A8%80-vs-%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80"><span class="nav-number">1.4.2.</span> <span class="nav-text">静态语言 vs 动态语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E5%A4%9A%E6%80%81%E7%9A%84%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.4.3.</span> <span class="nav-text">4.2 多态的条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E5%A4%9A%E6%80%81%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.3 多态的好处</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%85%B6%E4%BB%96%E7%89%B9%E6%80%A7"><span class="nav-number">1.5.</span> <span class="nav-text">5. 面向对象的其他特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E7%B1%BB%E5%B1%9E%E6%80%A7"><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1 类属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%88%E7%BB%83%E4%B9%A0%E6%9C%89%E7%94%A8%E5%88%B0%EF%BC%89"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.2 类方法（练习有用到）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="nav-number">1.5.3.</span> <span class="nav-text">5.3 静态方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E7%BB%83%E4%B9%A0"><span class="nav-number">1.6.</span> <span class="nav-text">6. 练习</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cokeiz</p>
+  <div class="site-description" itemprop="description">用此来记录我的生活和学习笔记以及学习过程</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/04/29/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cokeiz">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coke's Blog">
+      <meta itemprop="description" content="用此来记录我的生活和学习笔记以及学习过程">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="面向对象高级 | Coke's Blog">
+      <meta itemprop="description" content="本篇在面向对象基础的基础上深化了语法和面向对象的特性">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          面向对象高级
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-04-29 18:52:00" itemprop="dateCreated datePublished" datetime="2025-04-29T18:52:00+08:00">2025-04-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-05-04 20:54:51" itemprop="dateModified" datetime="2025-05-04T20:54:51+08:00">2025-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6/" itemprop="url" rel="index"><span itemprop="name">Python编程进阶</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">本篇在面向对象基础的基础上深化了语法和面向对象的特性</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="面向对象高级"><a href="#面向对象高级" class="headerlink" title="面向对象高级"></a>面向对象高级</h1><h2 id="1-定义类的语法"><a href="#1-定义类的语法" class="headerlink" title="1. 定义类的语法"></a>1. 定义类的语法</h2><h3 id="1-1语法"><a href="#1-1语法" class="headerlink" title="1.1语法"></a>1.1语法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义类</span></span><br><span class="line"><span class="comment"># 旧的</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Temp</span>:</span><br><span class="line">  <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 旧的</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Temp2</span>():</span><br><span class="line">  <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 新的 以后推荐都用这种</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">类名</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">	<span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-Python中的继承"><a href="#2-Python中的继承" class="headerlink" title="2. Python中的继承"></a>2. Python中的继承</h2><h3 id="2-1-概念"><a href="#2-1-概念" class="headerlink" title="2.1 概念"></a>2.1 概念</h3><ul>
+<li><strong><code>面向对象中的继承</code></strong>: 指的是多个类之间的所属关系，即子类默认继承父类的属性和方法。</li>
+<li><strong><code>作用</code></strong>: 提高代码的复用率, 减少重复代码的书写。</li>
+</ul>
+<p>在Python中，继承形式如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">父类名</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    ...(省略)</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">子类名</span>(<span class="title class_ inherited__">父类名</span>):   <span class="comment"># 继承语法</span></span><br><span class="line">    ...(省略)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-1-单继承"><a href="#2-2-1-单继承" class="headerlink" title="2.2.1 单继承"></a>2.2.1 单继承</h3><ul>
+<li>一个子类继承一个父类</li>
+</ul>
+<p>下面用故事案例来解释</p>
+<blockquote>
+<p>故事1：</p>
+<p>一个摊煎饼的老师傅[master]，在煎饼果子界摸爬滚打多年，研发了一套精湛的摊煎饼技术， 师父要把这套技术传授给他的唯一的最得意的徒弟[apprentice]。[初始化、无参]</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.定义师傅类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Master</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="comment"># 1.1 属性</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.kofu = <span class="string">&#x27;[秘制配方]&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 1.2 方法</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">make_cake</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;使用<span class="subst">&#123;self.kofu&#125;</span>摊煎饼&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.定义徒弟类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Apprentice</span>(<span class="title class_ inherited__">Master</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.实例化</span></span><br><span class="line">xiaoming = Apprentice()</span><br><span class="line"><span class="built_in">print</span>(xiaoming.kofu)</span><br><span class="line">xiaoming.make_cake()</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-2-多继承"><a href="#2-2-2-多继承" class="headerlink" title="2.2.2 多继承"></a>2.2.2 多继承</h3><ul>
+<li>一个子类继承多个父类</li>
+</ul>
+<blockquote>
+<p>故事2：</p>
+<p>小明是个爱学习的好孩子，想学习更多的摊煎饼果子技术，于是，在学校[school]，报班来培训学习摊煎饼果子技术。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Master</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.kofu = [<span class="string">&#x27;秘制配方&#x27;</span>]</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">make_cake</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;使用<span class="subst">&#123;self.kofu&#125;</span>摊煎饼&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">School</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.kofu = [<span class="string">&#x27;学院派配方&#x27;</span>]</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">make_cake</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;使用<span class="subst">&#123;self.kofu&#125;</span>摊煎饼&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Apprentice</span>(Master,School):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    xiaoming = Apprentice()</span><br><span class="line">    xiaoming.make_cake()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>当一个类有多个父类时，默认使用第一个父类的同名属性和方法，可以使用<strong>类名.mro</strong>或类名.mro()方法查看调用的先后顺序。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(Apprentice.__mro__)</span><br><span class="line"><span class="built_in">print</span>(Apprentice.mro())</span><br><span class="line"></span><br><span class="line"><span class="comment"># (&lt;class &#x27;__main__.Apprentice&#x27;&gt;, &lt;class &#x27;__main__.Master&#x27;&gt;, &lt;class &#x27;__main__.School&#x27;&gt;, &lt;class &#x27;object&#x27;&gt;)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-子类重写父类同名属性和方法"><a href="#2-3-子类重写父类同名属性和方法" class="headerlink" title="2.3 子类重写父类同名属性和方法"></a>2.3 子类重写父类同名属性和方法</h3><ul>
+<li>重写也叫作覆盖，就是当子类属性或方法与父类的属性或方法名字相同的时候，从父类继承下来的成员可以重新定义！</li>
+</ul>
+<blockquote>
+<p>故事3：</p>
+<p>xiaoming掌握了老师傅的技术后，自己潜心钻研出一套自己的独门配方的全新摊煎饼果子技术。  -老师傅！</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Master</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.kofu = [<span class="string">&#x27;秘制配方&#x27;</span>]</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">make_cake</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;使用<span class="subst">&#123;self.kofu&#125;</span>摊煎饼&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">School</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.kofu = [<span class="string">&#x27;学院派配方&#x27;</span>]</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">make_cake</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;使用<span class="subst">&#123;self.kofu&#125;</span>摊煎饼&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Apprentice</span>(Master,School):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.kofu = [<span class="string">&#x27;独创秘方&#x27;</span>]</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">make_cake</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;使用<span class="subst">&#123;self.kofu&#125;</span>摊煎饼&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    xiaoming = Apprentice()</span><br><span class="line">    xiaoming.make_cake()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-子类调用父类的方法"><a href="#2-4-子类调用父类的方法" class="headerlink" title="2.4 子类调用父类的方法"></a>2.4 子类调用父类的方法</h3><ul>
+<li><p>子类仍旧想要保留父类的行为，则需要在子类中调用父类的方法，有两种方法：</p>
+<ul>
+<li>1.直接使用分类名来调用，父类名.父类方法名()，需要提前写上父类的初始化</li>
+</ul>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Master</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.kongfu = [<span class="string">&#x27;秘制配方&#x27;</span>]</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">make_cake</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;使用<span class="subst">&#123;self.kongfu&#125;</span>摊煎饼&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">School</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.kongfu = [<span class="string">&#x27;学院派配方&#x27;</span>]</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">make_cake</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;使用<span class="subst">&#123;self.kongfu&#125;</span>摊煎饼&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Apprentice</span>(Master,School):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.kongfu = [<span class="string">&#x27;独创秘方&#x27;</span>]</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">make_cake</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;使用<span class="subst">&#123;self.kongfu&#125;</span>摊煎饼&#x27;</span>)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">make_cake_master</span>(<span class="params">self</span>):</span><br><span class="line">        Master.__init__(<span class="variable language_">self</span>)      <span class="comment">#父类的初始化</span></span><br><span class="line">        Master.make_cake(<span class="variable language_">self</span>)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">make_cake_school</span>(<span class="params">self</span>):</span><br><span class="line">        School.__init__(<span class="variable language_">self</span>)      <span class="comment">#父类的初始化</span></span><br><span class="line">        School.make_cake(<span class="variable language_">self</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    apprentice = Apprentice()</span><br><span class="line">    apprentice.make_cake()</span><br><span class="line">    apprentice.make_cake_master()     <span class="comment">#调用父类</span></span><br><span class="line">    apprentice.make_cake_school()     <span class="comment">#调用父类</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>2.使用super()调用父类方法，使用的方法：super().父类方法名()</li>
+</ul>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">super</span>.__init__(<span class="variable language_">self</span>)</span><br><span class="line"><span class="built_in">super</span>.make_cake(<span class="variable language_">self</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在相应的地方做替换即可，注意：使⽤super() 可以⾃动查找⽗类，适合单继承使⽤，多继承不建议使用</span></span><br><span class="line"><span class="comment"># Super()按照mro资源表，去查找父类的调用顺序；不是按照我们的人为的继承</span></span><br><span class="line"><span class="comment"># 单继承	super().__init__()	替代 Parent.__init__(self)</span></span><br><span class="line"><span class="comment">#多继承	super().method()	自动按 MRO 顺序调用</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="3-Python中的封装"><a href="#3-Python中的封装" class="headerlink" title="3. Python中的封装"></a>3. Python中的封装</h2><ul>
+<li>在软件编程中，将<strong>属性和方法</strong>书写到类的里面的操作即为封装，封装可以为属性和方法添加私有权限</li>
+</ul>
+<h3 id="3-1-定义和获取私有属性"><a href="#3-1-定义和获取私有属性" class="headerlink" title="3.1 定义和获取私有属性"></a>3.1 定义和获取私有属性</h3><ul>
+<li>设置私有权限的方式：在属性名前面加上两个下划线 __，格式：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.__属性名</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-定义和获取私有方法"><a href="#3-2-定义和获取私有方法" class="headerlink" title="3.2 定义和获取私有方法"></a>3.2 定义和获取私有方法</h3><ul>
+<li>Python中，可以为方法设置私有权限，即设置某个方法不继承给子类。</li>
+<li>设置私有权限的方式：在方法名前面加上两个下划线 __，格式：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def __方法名(self):</span><br><span class="line">     ...</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>私有权限 :</p>
+<ul>
+<li>私有属性<ul>
+<li>只能在类内部访问</li>
+<li>定义公有方法获取get_xxx或设置set_xxx私有属性值</li>
+</ul>
+</li>
+<li>私有方法<ul>
+<li>只能在类内部访问</li>
+<li>定义公有方法调用私有方法</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="4-python中的多态"><a href="#4-python中的多态" class="headerlink" title="4. python中的多态"></a>4. python中的多态</h2><ul>
+<li>多态，指的是：多种状态。比如：同样一个函数在不同的场景下有不同的状态。</li>
+</ul>
+<h3 id="4-1-多态"><a href="#4-1-多态" class="headerlink" title="4.1 多态"></a>4.1 多态</h3><p>这里引用<a target="_blank" rel="noopener" href="https://liaoxuefeng.com/books/python/oop/extend/index.html">继承和多态 - Python教程 - 廖雪峰的官方网站</a>的内容：</p>
+<ul>
+<li><p>继承和多态</p>
+<p>  比如，我们已经编写了一个名为<code>Animal</code>的class，有一个<code>run()</code>方法可以直接打印：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Animal is running...&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  当我们需要编写<code>Dog</code>和<code>Cat</code>类时，就可以直接从<code>Animal</code>类继承：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  对于<code>Dog</code>来说，<code>Animal</code>就是它的父类，对于<code>Animal</code>来说，<code>Dog</code>就是它的子类。<code>Cat</code>和<code>Dog</code>类似。</p>
+<p>  继承有什么好处？最大的好处是子类获得了父类的全部功能。由于<code>Animal</code>实现了<code>run()</code>方法，因此，<code>Dog</code>和<code>Cat</code>作为它的子类，什么事也没干，就自动拥有了<code>run()</code>方法：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dog = Dog()</span><br><span class="line">dog.run()</span><br><span class="line"></span><br><span class="line">cat = Cat()</span><br><span class="line">cat.run()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  运行结果如下：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Animal is running...</span><br><span class="line">Animal is running...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  当然，也可以对子类增加一些方法，比如Dog类：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Dog is running...&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">eat</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Eating meat...&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  继承的第二个好处需要我们对代码做一点改进。你看到了，无论是<code>Dog</code>还是<code>Cat</code>，它们<code>run()</code>的时候，显示的都是<code>Animal is running...</code>，符合逻辑的做法是分别显示<code>Dog is running...</code>和<code>Cat is running...</code>，因此，对<code>Dog</code>和<code>Cat</code>类改进如下：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Dog is running...&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Cat is running...&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  再次运行，结果如下：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Dog is running...</span><br><span class="line">Cat is running...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  当子类和父类都存在相同的<code>run()</code>方法时，我们说，子类的<code>run()</code>覆盖了父类的<code>run()</code>，在代码运行的时候，总是会调用子类的<code>run()</code>。这样，我们就获得了继承的另一个好处：多态。</p>
+<p>  要理解什么是多态，我们首先要对数据类型再作一点说明。当我们定义一个class的时候，我们实际上就定义了一种数据类型。我们定义的数据类型和Python自带的数据类型，比如str、list、dict没什么两样：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="built_in">list</span>() <span class="comment"># a是list类型</span></span><br><span class="line">b = Animal() <span class="comment"># b是Animal类型</span></span><br><span class="line">c = Dog() <span class="comment"># c是Dog类型</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  判断一个变量是否是某个类型可以用<code>isinstance()</code>判断：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(a, list)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(b, Animal)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(c, Dog)</span><br><span class="line">True</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  看来<code>a</code>、<code>b</code>、<code>c</code>确实对应着<code>list</code>、<code>Animal</code>、<code>Dog</code>这3种类型。</p>
+<p>  但是等等，试试：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; isinstance(c, Animal)</span><br><span class="line">True</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  看来<code>c</code>不仅仅是<code>Dog</code>，<code>c</code>还是<code>Animal</code>！</p>
+<p>  不过仔细想想，这是有道理的，因为<code>Dog</code>是从<code>Animal</code>继承下来的，当我们创建了一个<code>Dog</code>的实例<code>c</code>时，我们认为<code>c</code>的数据类型是<code>Dog</code>没错，但<code>c</code>同时也是<code>Animal</code>也没错，<code>Dog</code>本来就是<code>Animal</code>的一种！</p>
+<p>  所以，在继承关系中，如果一个实例的数据类型是某个子类，那它的数据类型也可以被看做是父类。但是，反过来就不行：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; b = Animal()</span><br><span class="line">&gt;&gt;&gt; isinstance(b, Dog)</span><br><span class="line">False</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  <code>Dog</code>可以看成<code>Animal</code>，但<code>Animal</code>不可以看成<code>Dog</code>。</p>
+<p>  要理解多态的好处，我们还需要再编写一个函数，这个函数接受一个<code>Animal</code>类型的变量：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">run_twice</span>(<span class="params">animal</span>):</span><br><span class="line">    animal.run()</span><br><span class="line">    animal.run()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  当我们传入<code>Animal</code>的实例时，<code>run_twice()</code>就打印出：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; run_twice(Animal())</span><br><span class="line">Animal is running...</span><br><span class="line">Animal is running...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  当我们传入<code>Dog</code>的实例时，<code>run_twice()</code>就打印出：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; run_twice(Dog())</span><br><span class="line">Dog is running...</span><br><span class="line">Dog is running...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  当我们传入<code>Cat</code>的实例时，<code>run_twice()</code>就打印出：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; run_twice(Cat())</span><br><span class="line">Cat is running...</span><br><span class="line">Cat is running...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  看上去没啥意思，但是仔细想想，现在，如果我们再定义一个<code>Tortoise</code>类型，也从<code>Animal</code>派生：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Tortoise</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Tortoise is running slowly...&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  当我们调用<code>run_twice()</code>时，传入<code>Tortoise</code>的实例：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; run_twice(Tortoise())</span><br><span class="line">Tortoise is running slowly...</span><br><span class="line">Tortoise is running slowly...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  你会发现，新增一个<code>Animal</code>的子类，不必对<code>run_twice()</code>做任何修改，实际上，任何依赖<code>Animal</code>作为参数的函数或者方法都可以不加修改地正常运行，原因就在于多态。</p>
+<p>  多态的好处就是，当我们需要传入<code>Dog</code>、<code>Cat</code>、<code>Tortoise</code>……时，我们只需要接收<code>Animal</code>类型就可以了，因为<code>Dog</code>、<code>Cat</code>、<code>Tortoise</code>……都是<code>Animal</code>类型，然后，按照<code>Animal</code>类型进行操作即可。由于<code>Animal</code>类型有<code>run()</code>方法，因此，传入的任意类型，只要是<code>Animal</code>类或者子类，就会自动调用实际类型的<code>run()</code>方法，这就是多态的意思：</p>
+<p>  对于一个变量，我们只需要知道它是<code>Animal</code>类型，无需确切地知道它的子类型，就可以放心地调用<code>run()</code>方法，而具体调用的<code>run()</code>方法是作用在<code>Animal</code>、<code>Dog</code>、<code>Cat</code>还是<code>Tortoise</code>对象上，由运行时该对象的确切类型决定，这就是多态真正的威力：调用方只管调用，不管细节**，而当我们新增一种<code>Animal</code>的子类时，只要确保<code>run()</code>方法编写正确，不用管原来的代码是如何调用的。**这就是著名的“开闭”原则：</p>
+<p>  对扩展开放：允许新增<code>Animal</code>子类；</p>
+<p>  对修改封闭：不需要修改依赖<code>Animal</code>类型的<code>run_twice()</code>等函数。</p>
+<h3 id="静态语言-vs-动态语言"><a href="#静态语言-vs-动态语言" class="headerlink" title="静态语言 vs 动态语言"></a><strong>静态语言 vs 动态语言</strong></h3><p>  对于静态语言（例如Java）来说，如果需要传入<code>Animal</code>类型，则传入的对象必须是<code>Animal</code>类型或者它的子类，否则，将无法调用<code>run()</code>方法。</p>
+<p>  对于Python这样的动态语言来说，则不一定需要传入<code>Animal</code>类型。我们只需要保证传入的对象有一个<code>run()</code>方法就可以了：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Timer</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Start...&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  这就是动态语言的“鸭子类型”，它并不要求严格的继承体系，一个对象只要“看起来像鸭子，走起路来像鸭子”，那它就可以被看做是鸭子。</p>
+<p>  Python的“file-like object“就是一种鸭子类型。对真正的文件对象，它有一个<code>read()</code>方法，返回其内容。但是，许多对象，只要有<code>read()</code>方法，都被视为“file-like object“。许多函数接收的参数就是“file-like object“，你不一定要传入真正的文件对象，完全可以传入任何实现了<code>read()</code>方法的对象。</p>
+</li>
+</ul>
+<h3 id="4-2-多态的条件"><a href="#4-2-多态的条件" class="headerlink" title="4.2 多态的条件"></a>4.2 多态的条件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、有继承 （定义父类、定义子类，子类继承父类)</span><br><span class="line"><span class="number">2</span>、函数重写 （子类重写父类的函数）</span><br><span class="line"><span class="number">3</span>、父类引用指向子类对象 （子类对象传给父类对象调用者）</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-多态的好处"><a href="#4-3-多态的好处" class="headerlink" title="4.3 多态的好处"></a>4.3 多态的好处</h3><ul>
+<li>以下的概念有点模糊，建议去看上文4.1</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、在不改变框架代码的情况下，通过多态语法轻松的实现模块和模块之间的解耦合；实现了软件系统的可拓展</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、对解耦合的大白话解释：搭建的平台函数<span class="keyword">def</span> <span class="title function_">object_play</span>(<span class="params">herofighter:HeroFighter, enemyfighter:EnemyFighter</span>) 相当于任务的调用者；子类、孙子类重写父类的函数，相当于子任务；相当于任务的调用者和任务的编写者进行了解耦合</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>、对可拓展的大白话解释： 搭建的平台函数<span class="keyword">def</span> <span class="title function_">object_play</span>(<span class="params">herofighter:HeroFighter, enemyfighter:EnemyFighter</span>)，在不做任何修改的情况下，可以调用后来人写的代码</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>、对“继承和多态对照理解”大白话解释：</span><br><span class="line">	继承相当于：孩子可以复用老爹的东西。</span><br><span class="line">	多态相当于：老爹框架，不做任何修改的情况下，可以可拓展的使用后来人（孩子）写的东西。</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-面向对象的其他特性"><a href="#5-面向对象的其他特性" class="headerlink" title="5. 面向对象的其他特性"></a>5. 面向对象的其他特性</h2><h3 id="5-1-类属性"><a href="#5-1-类属性" class="headerlink" title="5.1 类属性"></a>5.1 类属性</h3><ul>
+<li>所谓类属性，指的就是类所拥有的属性，它被共享于整个类中(即都可以直接调用)，格式如下：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">类名.类属性名    # 推荐使用</span><br></pre></td></tr></table></figure>
+
+<p>或：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象名.类属性名</span><br></pre></td></tr></table></figure>
+
+<p>例如，在People类中定义一个名为<strong>count的类属性</strong>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.定义类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    count = <span class="number">1</span></span><br><span class="line">    __height = <span class="number">165</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.获取属性值:类名.类属性</span></span><br><span class="line"><span class="built_in">print</span>(Person.count)</span><br><span class="line"><span class="comment"># p = Person()</span></span><br><span class="line"><span class="comment"># print(p.count)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-类方法（练习有用到）"><a href="#5-2-类方法（练习有用到）" class="headerlink" title="5.2 类方法（练习有用到）"></a>5.2 类方法（练习有用到）</h3><ul>
+<li>所谓类方法，指的是类所拥有的方法，并需要使用[装饰器]<strong>@classmethod</strong>来标识其为类方法</li>
+</ul>
+<p>同时一定要注意的是对于类方法的第一个参数必须是类对象，通常以<strong>cls</strong>作为第一个参数名，格式如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@classmethod</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">类方法名</span>(<span class="params">cls</span>):          <span class="comment"># 可以与self类比</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>调用时</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">类名.类方法名()    <span class="comment">#比较推荐</span></span><br><span class="line"></span><br><span class="line">对象名.类方法名()</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-3-静态方法"><a href="#5-3-静态方法" class="headerlink" title="5.3 静态方法"></a>5.3 静态方法</h3><ul>
+<li>静态方法需要通过装饰器@staticmethod来来标识其为静态方法，且静态方法不需要多定义参数，格式如下：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@staticmethod</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">静态方法名</span>():</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>调用时，格式如下：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">类名.静态方法名    # 推荐使用</span><br></pre></td></tr></table></figure>
+
+<p>或：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象名.静态方法名</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>例如，开发一款游戏要显示初始化操作界面，分别有开始、暂停、退出等按键。</li>
+</ul>
+<h2 id="6-练习"><a href="#6-练习" class="headerlink" title="6. 练习"></a>6. 练习</h2><p><a href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/%E7%BB%83%E4%B9%A0%E4%B8%80%201e23311af3f5818cb95ec12db25949fa.md">练习一</a></p>
+<p><a href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/%E7%BB%83%E4%B9%A0%E4%BA%8C%201e23311af3f5814091d8eff5d0c29d34.md">练习二</a></p>
+<p><a href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/%E7%BB%83%E4%B9%A0%E4%B8%89%201e23311af3f58193af24f9aebd0bad69.md">练习三</a></p>
+<p><a href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/%E7%BB%83%E4%B9%A0%E5%9B%9B%201e23311af3f581d0875fd5a44def8b9f.md">练习四</a></p>
+<p><a href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/%E7%BB%83%E4%B9%A0%E4%BA%94%201e23311af3f581f9977ccc657fab8b6e.md">练习五</a></p>
+<p><a href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%201e23311af3f580dd9c7ddc648685ab5c/%E7%BB%83%E4%B9%A0%E5%85%AD%201e23311af3f581aa99e4c16302a83ab7.md">练习六</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag"># 面向对象</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/04/28/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80%201e13311af3f5806b9689ed5ffdc7dbf8/" rel="prev" title="面向对象基础">
+                  <i class="fa fa-angle-left"></i> 面向对象基础
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/04/30/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E9%97%AD%E5%8C%85%E8%A3%85%E9%A5%B0%E5%99%A8%201e63311af3f580e081d4e293f50d790d/" rel="next" title="闭包装饰器">
+                  闭包装饰器 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">cokeiz</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

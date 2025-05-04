@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="python高级语法与正则表达式1. python高级语法1.1 with语句和上下文管理器 with语句 既简单又安全，文件操作的时候使用with语句可以自动调用关闭文件操作，即使出现异常也会自动关闭文件操作。  1234# 1、以写的方式打开文件with open(&#x27;1.txt&#x27;, &#x27;w&#x27;) as f:    # 2、读取文件内容    f.write(">
+    <meta name="description" content="本篇主要介绍了 with、yield等高级语法，并讲解了正则表达式的概念及使用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python高级语法与正则表达式">
 <meta property="og:url" content="http://example.com/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/python%E9%AB%98%E7%BA%A7%E8%AF%AD%E6%B3%95%E4%B8%8E%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%201e83311af3f580999130d55fc649c8b7/index.html">
 <meta property="og:site_name" content="Coke&#39;s Blog">
-<meta property="og:description" content="python高级语法与正则表达式1. python高级语法1.1 with语句和上下文管理器 with语句 既简单又安全，文件操作的时候使用with语句可以自动调用关闭文件操作，即使出现异常也会自动关闭文件操作。  1234# 1、以写的方式打开文件with open(&#x27;1.txt&#x27;, &#x27;w&#x27;) as f:    # 2、读取文件内容    f.write(">
+<meta property="og:description" content="本篇主要介绍了 with、yield等高级语法，并讲解了正则表达式的概念及使用">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-05-03T05:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-03T13:00:46.943Z">
+<meta property="article:modified_time" content="2025-05-04T12:53:30.158Z">
 <meta property="article:author" content="cokeiz">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="面向对象">
@@ -136,12 +136,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
@@ -186,7 +186,7 @@
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="python高级语法与正则表达式 | Coke's Blog">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="本篇主要介绍了 with、yield等高级语法，并讲解了正则表达式的概念及使用">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -200,9 +200,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-05-03 13:00:00 / 修改时间：21:00:46" itemprop="dateCreated datePublished" datetime="2025-05-03T13:00:00+08:00">2025-05-03</time>
+      <time title="创建时间：2025-05-03 13:00:00" itemprop="dateCreated datePublished" datetime="2025-05-03T13:00:00+08:00">2025-05-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-05-04 20:53:30" itemprop="dateModified" datetime="2025-05-04T20:53:30+08:00">2025-05-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -217,6 +223,7 @@
   
 </div>
 
+            <div class="post-description">本篇主要介绍了 with、yield等高级语法，并讲解了正则表达式的概念及使用</div>
         </div>
       </header>
 
@@ -476,13 +483,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%201e63311af3f580cfb0d8d03a5987b2e4/" rel="prev" title="网络编程">
-                  <i class="fa fa-angle-left"></i> 网络编程
+                <a href="/2025/05/02/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E5%A4%9A%E4%BB%BB%E5%8A%A1%E7%BC%96%E7%A8%8B%201e73311af3f580bb8341ed57864abbc3/" rel="prev" title="多任务编程">
+                  <i class="fa fa-angle-left"></i> 多任务编程
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/05/03/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E5%A4%9A%E4%BB%BB%E5%8A%A1%E7%BC%96%E7%A8%8B%201e73311af3f580bb8341ed57864abbc3/" rel="next" title="多任务编程">
-                  多任务编程 <i class="fa fa-angle-right"></i>
+                <a href="/2025/05/04/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%201e93311af3f580cfbf8fdb2fe2326411/" rel="next" title="数据结构与算法">
+                  数据结构与算法 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
