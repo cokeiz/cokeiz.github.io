@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="本篇章主要介绍了Linux的使用技巧和Mysql概念和基础，基于在linux环境上通过NAT网络端口映射，来使用本地主机的Pycharm使用Mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux使用技巧和Mysql基础">
+<meta property="og:url" content="http://example.com/2025/05/08/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%201ec3311af3f5801682d5fc9c085d70e9/Linux%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E5%92%8CMysql%E5%9F%BA%E7%A1%80%201ed3311af3f580aabc5acbc958b7683d/index.html">
+<meta property="og:site_name" content="Coke&#39;s Blog">
+<meta property="og:description" content="本篇章主要介绍了Linux的使用技巧和Mysql概念和基础，基于在linux环境上通过NAT网络端口映射，来使用本地主机的Pycharm使用Mysql">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-05-08T12:59:00.000Z">
+<meta property="article:modified_time" content="2025-05-10T11:44:40.963Z">
+<meta property="article:author" content="cokeiz">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="数据处理与统计分析">
+<meta property="article:tag" content="Mysql">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/05/08/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%201ec3311af3f5801682d5fc9c085d70e9/Linux%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E5%92%8CMysql%E5%9F%BA%E7%A1%80%201ed3311af3f580aabc5acbc958b7683d/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/05/08/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%201ec3311af3f5801682d5fc9c085d70e9/Linux%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E5%92%8CMysql%E5%9F%BA%E7%A1%80%201ed3311af3f580aabc5acbc958b7683d/","path":"2025/05/08/数据处理与统计分析 1ec3311af3f5801682d5fc9c085d70e9/Linux使用技巧和Mysql基础 1ed3311af3f580aabc5acbc958b7683d/","title":"Linux使用技巧和Mysql基础"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Linux使用技巧和Mysql基础 | Coke's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Coke's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人生苦短，我用python</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E5%92%8CMysql%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">Linux使用技巧和Mysql基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Linux%E5%B0%8F%E6%8A%80%E5%B7%A7"><span class="nav-number">1.1.</span> <span class="nav-text">1. Linux小技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E5%BC%BA%E5%88%B6%E5%91%BD%E4%BB%A4"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 强制命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%8E%86%E5%8F%B2%E5%91%BD%E4%BB%A4"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 历史命令:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E5%85%89%E6%A0%87%E7%A7%BB%E5%8A%A8%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3 光标移动快捷键</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.</span> <span class="nav-text">2. 软件安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-yum%E5%91%BD%E4%BB%A4"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 yum命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-systemctl%E5%91%BD%E4%BB%A4%E6%8E%A7%E5%88%B6%E8%BD%AF%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">3. systemctl命令控制软件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1-%E8%BD%AF%E4%BB%B6-%E6%89%93%E5%BC%80%E6%88%96%E5%85%B3%E9%97%AD"><span class="nav-number">1.3.1.</span> <span class="nav-text">服务&#x2F;软件 打开或关闭</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%BD%AF%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.4.</span> <span class="nav-text">4. 软连接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-IP%E5%9C%B0%E5%9D%80-%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90-%E4%B8%BB%E6%9C%BA%E5%90%8D"><span class="nav-number">1.4.1.</span> <span class="nav-text">5 IP地址&#x2F;域名解析&#x2F;主机名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-centos-%E5%9B%BA%E5%AE%9Aip%E8%AE%BE%E7%BD%AE-%E4%BA%86%E8%A7%A3"><span class="nav-number">1.4.2.</span> <span class="nav-text">6 centos 固定ip设置(了解)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C-%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.4.3.</span> <span class="nav-text">7 网络操作&#x2F;文件下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%E6%9F%A5%E7%9C%8B-%E8%BF%9B%E7%A8%8B%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.4.4.</span> <span class="nav-text">8 端口占用查看&#x2F;进程查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.4.5.</span> <span class="nav-text">9 环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-%E5%8E%8B%E7%BC%A9%E8%A7%A3%E5%8E%8B%E7%BC%A9"><span class="nav-number">1.4.6.</span> <span class="nav-text">10 压缩解压缩</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql"><span class="nav-number">1.5.</span> <span class="nav-text">Mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%80%E4%BB%8B"><span class="nav-number">1.5.1.</span> <span class="nav-text">1 数据库简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Mysql-%E7%AE%80%E4%BB%8B"><span class="nav-number">1.5.2.</span> <span class="nav-text">2 Mysql 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-SQL-%E8%AF%AD%E8%A8%80%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.5.3.</span> <span class="nav-text">3 SQL 语言介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-SQL%E8%AF%AD%E8%A8%80%E7%9A%84DDL"><span class="nav-number">1.5.4.</span> <span class="nav-text">4 SQL语言的DDL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-SQL%E8%AF%AD%E8%A8%80%E7%9A%84DML"><span class="nav-number">1.5.5.</span> <span class="nav-text">5 SQL语言的DML</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cokeiz</p>
+  <div class="site-description" itemprop="description">用此来记录我的生活和学习笔记以及学习过程</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/08/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%201ec3311af3f5801682d5fc9c085d70e9/Linux%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E5%92%8CMysql%E5%9F%BA%E7%A1%80%201ed3311af3f580aabc5acbc958b7683d/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cokeiz">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coke's Blog">
+      <meta itemprop="description" content="用此来记录我的生活和学习笔记以及学习过程">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Linux使用技巧和Mysql基础 | Coke's Blog">
+      <meta itemprop="description" content="本篇章主要介绍了Linux的使用技巧和Mysql概念和基础，基于在linux环境上通过NAT网络端口映射，来使用本地主机的Pycharm使用Mysql">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux使用技巧和Mysql基础
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-05-08 20:59:00" itemprop="dateCreated datePublished" datetime="2025-05-08T20:59:00+08:00">2025-05-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-05-10 19:44:40" itemprop="dateModified" datetime="2025-05-10T19:44:40+08:00">2025-05-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/" itemprop="url" rel="index"><span itemprop="name">数据处理与统计分析</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">本篇章主要介绍了Linux的使用技巧和Mysql概念和基础，基于在linux环境上通过NAT网络端口映射，来使用本地主机的Pycharm使用Mysql</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Linux使用技巧和Mysql基础"><a href="#Linux使用技巧和Mysql基础" class="headerlink" title="Linux使用技巧和Mysql基础"></a>Linux使用技巧和Mysql基础</h1><h2 id="1-Linux小技巧"><a href="#1-Linux小技巧" class="headerlink" title="1. Linux小技巧"></a>1. Linux小技巧</h2><h3 id="1-1-强制命令"><a href="#1-1-强制命令" class="headerlink" title="1.1 强制命令"></a>1.1 强制命令</h3><p>ctrl + c 强制停止</p>
+<p>ctrl + d 强制退出&#x2F;登出</p>
+<h3 id="1-2-历史命令"><a href="#1-2-历史命令" class="headerlink" title="1.2 历史命令:"></a>1.2 历史命令:</h3><p>history查看输入过的命令；还可以搭配其他命令使用</p>
+<p>!命令前缀，自动执行上一次匹配前缀的命令</p>
+<p>ctrl + r，输入内容去匹配历史命令</p>
+<h3 id="1-3-光标移动快捷键"><a href="#1-3-光标移动快捷键" class="headerlink" title="1.3 光标移动快捷键"></a>1.3 <strong>光标移动快捷键</strong></h3><ul>
+<li>ctrl + a，跳到命令开头</li>
+<li>ctrl + e，跳到命令结尾</li>
+<li>ctrl + 键盘左键，向左跳一个单词</li>
+<li>ctrl + 键盘右键，向右跳一个单词</li>
+</ul>
+<h2 id="2-软件安装"><a href="#2-软件安装" class="headerlink" title="2. 软件安装"></a>2. 软件安装</h2><h3 id="2-1-yum命令"><a href="#2-1-yum命令" class="headerlink" title="2.1 yum命令"></a>2.1 yum命令</h3><p>yum：RPM包软件管理器，用于自动化安装配置Linux软件，并可以自动解决依赖问题。</p>
+<p>语法：</p>
+<ul>
+<li>选项：-y，自动确认，无需手动确认安装或卸载过程</li>
+<li>install：安装</li>
+<li>remove：卸载</li>
+<li>search：搜索</li>
+</ul>
+<p>yum命令需要root权限哦，可以su切换到root，或使用sudo提权。</p>
+<p>yum命令需要联网</p>
+<h2 id="3-systemctl命令控制软件"><a href="#3-systemctl命令控制软件" class="headerlink" title="3. systemctl命令控制软件"></a>3. systemctl命令控制软件</h2><h3 id="服务-软件-打开或关闭"><a href="#服务-软件-打开或关闭" class="headerlink" title="服务&#x2F;软件 打开或关闭"></a>服务&#x2F;软件 打开或关闭</h3><p>Linux系统很多软件（内置或第三方）均支持使用systemctl命令控制：启动、停止、开机自启能够被systemctl管理的软件，一般也称之为：服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start|stop|status|enable|disable</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>start 启动</p>
+<p>stop 关闭</p>
+<p>status 查看状态</p>
+<p>enable 开启开机自启</p>
+<p>disable 关闭开机自启</p>
+</blockquote>
+<p>应用场景:  修改了网络配置, 需要重启网络的服务 systemctl stop&#x2F;start</p>
+<p>系统内置的服务比较多，比如：</p>
+<p>NetworkManager，主网络服务</p>
+<p>network，副网络服务</p>
+<p>firewalld，防火墙服务</p>
+<p>sshd，ssh服务（FinalShell远程登录Linux使用的就是这个服务）</p>
+<h2 id="4-软连接"><a href="#4-软连接" class="headerlink" title="4. 软连接"></a>4. 软连接</h2><p>在系统中创建软链接，可以将文件、文件夹链接到其它位置。类似Windows系统中的《快捷方式》</p>
+<ul>
+<li>s选项，创建软连接</li>
+</ul>
+<p>参数1：被链接的文件或文件夹参数2：要链接去的目的地</p>
+<h3 id="5-IP地址-域名解析-主机名"><a href="#5-IP地址-域名解析-主机名" class="headerlink" title="5 IP地址&#x2F;域名解析&#x2F;主机名"></a>5 IP地址&#x2F;域名解析&#x2F;主机名</h3><p>想联网访问互联网, 必须有IP地址</p>
+<ul>
+<li>ip地址两个版本 ipv4 ipv6<ul>
+<li>ipv4 a.b.c.d 4个8位二进制数组成</li>
+</ul>
+</li>
+</ul>
+<p>通过域名访问网络服务, 先要进行域名解析</p>
+<ul>
+<li>通过本地的hosts 记录域名和ip的对应关系<ul>
+<li>windows C:\Windows\System32\drivers\etc\hosts</li>
+<li>linux &#x2F;etc&#x2F;hosts</li>
+</ul>
+</li>
+<li>DNS服务 在网络上记录了域名和ip的对应关系<ul>
+<li>8.8.8.8 114.114.114.114</li>
+</ul>
+</li>
+</ul>
+<p>主机名, 每一台机器都有名字</p>
+<ul>
+<li>hostname查看主机名</li>
+<li>hostnamectl set-hostname 主机名，修改主机名（需root）</li>
+</ul>
+<h3 id="6-centos-固定ip设置-了解"><a href="#6-centos-固定ip设置-了解" class="headerlink" title="6 centos 固定ip设置(了解)"></a>6 centos 固定ip设置(了解)</h3><h3 id="7-网络操作-文件下载"><a href="#7-网络操作-文件下载" class="headerlink" title="7 网络操作&#x2F;文件下载"></a>7 网络操作&#x2F;文件下载</h3><ul>
+<li>ping ping url &#x2F;ping ip<ul>
+<li>测试网络是否联通</li>
+<li>ping 192.168.88.2 测局域网通不通</li>
+<li>ping <a target="_blank" rel="noopener" href="http://baidu.com/">baidu.com</a> 测互联网是否联通</li>
+</ul>
+</li>
+<li>wget<ul>
+<li>软件的下载</li>
+<li>wget url地址</li>
+</ul>
+</li>
+<li>curl<ul>
+<li>发送http请求的命令</li>
+<li>curl -o url 也可以做软件下载</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-端口占用查看-进程查询"><a href="#8-端口占用查看-进程查询" class="headerlink" title="8 端口占用查看&#x2F;进程查询"></a>8 端口占用查看&#x2F;进程查询</h3><p>nmap 127.0.0.1</p>
+<p><strong>netstat</strong> -anp | grep 端口号  可以查看端口被占用的情况 获取占用端口的进程ID</p>
+<p><strong>ps -ef</strong> 查看进程相关的所有信息</p>
+<p>查询出1447是mysql占用之后, 可以根据当前情况判断</p>
+<ul>
+<li>如果端口冲突, 可以选择换端口</li>
+<li>kill -9 1447</li>
+</ul>
+<h3 id="9-环境变量"><a href="#9-环境变量" class="headerlink" title="9 环境变量"></a>9 环境变量</h3><p>环境变量是一组信息记录，类型是KeyValue型（名称&#x3D;值），用于操作系统运行的时候记录关键信息</p>
+<ul>
+<li>配置环境变量的时候, 主要就是配置PATH</li>
+<li>PATH 是一系列的<strong>文件夹</strong>, 多个文件夹之间用 <strong>:</strong> 隔开</li>
+<li>配置了PATH之后, 在PATH中的可执行文件, 在任何一个工作目录下敲文件名就可以直接执行了</li>
+</ul>
+<p>linux 配置环境变量</p>
+<p>export PATH&#x3D;$PATH:&#x2F;home&#x2F;itheima&#x2F;myenv</p>
+<p>针对用户：~&#x2F;.bashrc文件中配置</p>
+<p>针对全部用户：&#x2F;etc&#x2F;profile文件中配置</p>
+<p>配置完成，可以通过source命令立刻生效</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>创建一个文件mkhaha 添加可执行的权限</p>
+<ul>
+<li>chmod +x mkhaha</li>
+</ul>
+<h3 id="10-压缩解压缩"><a href="#10-压缩解压缩" class="headerlink" title="10 压缩解压缩"></a>10 压缩解压缩</h3><p>tar&#x2F;tar.gz</p>
+<ul>
+<li><p>打tar包</p>
+<p>  tar -cvf xxxx.tar 文件名</p>
+</li>
+<li><p>打 tar.gz包</p>
+<p>  tar -zcvf xxxx.tar 文件名</p>
+</li>
+<li><p>解开tar包</p>
+<p>  tar -xvf xxxx.tar -C 要解开的目的地路径</p>
+</li>
+<li><p>解开tar.gz包</p>
+<p>  tar -zxvf xxxx.tar -C 要解开的目的地路径</p>
+</li>
+</ul>
+<p>zip</p>
+<ul>
+<li>打包zip</li>
+</ul>
+<p>zip [-r] XXX.zip  要打包的文件 …..</p>
+<ul>
+<li>解压zip</li>
+</ul>
+<p>unzip xxx.zip -d 指定要解压的目录</p>
+<h2 id="Mysql"><a href="#Mysql" class="headerlink" title="Mysql"></a>Mysql</h2><p>运行Mysql: mysql -u root -p</p>
+<p>环境配置</p>
+<p>激活pycharm</p>
+<p>先创建一个python的项目</p>
+<p>找到 Database 工具栏</p>
+<p>配置mysql 链接, 这里使用centos上的Mysql (连之前centos一定要打开)</p>
+<ul>
+<li>ip 192.168.88.161</li>
+<li>用户名 root</li>
+<li>密码 123456</li>
+</ul>
+<p> ip  127.0.0.1</p>
+<p>配置好Mysql连接之后, 打开默认控制台, 可以在里面写SQL</p>
+<h3 id="1-数据库简介"><a href="#1-数据库简介" class="headerlink" title="1 数据库简介"></a>1 数据库简介</h3><p>数据库就是存储数据的仓库，用户可以对数据库中的数据进行增加，修改，删除及查询操作。</p>
+<p>数据库分为关系型数据库和非关系型数据库。</p>
+<p>常用的关系型数据库有：MySQL，Oracle，DB2，SQLserver，sqlite</p>
+<p>常用的非关系型数据库有：Redis，Hbase，MongoDB</p>
+<h3 id="2-Mysql-简介"><a href="#2-Mysql-简介" class="headerlink" title="2 Mysql 简介"></a>2 Mysql 简介</h3><p>MySQL的特点：免费，支持大型数据库，标准的SQL语言形式，跨平台。</p>
+<p>课程使用的版本 centos上装的是5.6.51  不支持窗口函数 window function</p>
+<p>后面使用MySQL8.0版本。2018</p>
+<p>MySQL登录的两种方式：</p>
+<p>方法一：mysql -uroot -p123456</p>
+<p>方法二：mysql –host&#x3D;192.168.88.161 –user&#x3D;root –password&#x3D;123456</p>
+<h3 id="3-SQL-语言介绍"><a href="#3-SQL-语言介绍" class="headerlink" title="3 SQL 语言介绍"></a>3 SQL 语言介绍</h3><ul>
+<li><p>结构化查询语言(Structured Query Language)简称SQL，是关系型数据库管理系统都需要遵循的规范，是数据库认识的语句。不同的数据库生产厂商都支持SQL语句，但都有自己特有内容。</p>
+</li>
+<li><p>标准SQL</p>
+<ul>
+<li>Mysql 支持的SQL 可以看做是标准SQL的方言 (大多数都一样, 少部分区别)</li>
+<li>Oracle 支持的SQL 可以看做是标准SQL的方言</li>
+</ul>
+</li>
+<li><p>SQL 的分类</p>
+<p>  操作数据库数据表  DDL</p>
+<p>  对数据进行增加删除修改 DML</p>
+<p>  对数据库进行<strong>查询 DQL</strong></p>
+<p>  DCL  权限控制, 用户创建管理   不涉及(DBA 管理)</p>
+</li>
+<li><p>SQL 注释</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/**/：多行注释，在注释区域内可以随意换行</span><br><span class="line">-- # ：单行注释，写在语句开头，换行后注释截止。</span><br><span class="line">单行注释快捷键：ctrl+/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>常用的数据类型：<ul>
+<li>字符：char，varchar</li>
+<li>整数：int</li>
+<li>浮点型：float, double,decimal</li>
+<li>日期型：date，datetime</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-SQL语言的DDL"><a href="#4-SQL语言的DDL" class="headerlink" title="4 SQL语言的DDL"></a>4 SQL语言的DDL</h3><p><strong>DDL 建库建表</strong> →DML 向表中写入数据(修改, 删除) → DQL(数据查询)</p>
+<p>数据库操作</p>
+<ul>
+<li>创建数据库：CREATE DATABASE 数据库名；</li>
+<li>查看数据库：SHOW DATABASES;</li>
+<li>删除数据库：DROP DATABASE 数据库名；</li>
+<li>使用数据库：USE 数据库名</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- DDL 创建数据库</span></span><br><span class="line"><span class="keyword">create</span> database if <span class="keyword">not</span> <span class="keyword">exists</span> ai_db charset <span class="operator">=</span>utf8;</span><br><span class="line"><span class="comment">-- create database if not exists 数据库名 charset=字符集</span></span><br><span class="line"><span class="keyword">show</span> databases;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除数据库</span></span><br><span class="line"><span class="keyword">DROP</span> DATABASE ai_db;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 选中一个数据库, 后续操作, 都在这个数据库中进行</span></span><br><span class="line">use ai_db;</span><br></pre></td></tr></table></figure>
+
+<p>数据表操作</p>
+<p>创建表：CREATE TABLE 表名(字段名 类型 约束…)</p>
+<p>查询表：SHOW TABLES;     DESC 表名；</p>
+<p>删除表：drop table 表名;</p>
+<p>修改表：</p>
+<ul>
+<li>alter table 表名 add 列名 类型(长度) [约束]; 增加一列</li>
+<li>alter table 表名 change 旧列名 新列名 类型(长度) 约束; 修改一列名字</li>
+<li>alter table 表名 drop 列名;	删除一列</li>
+<li>rename table 表名 to 新表名; 修改表名</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 选中一个数据库, 后续操作, 都在这个数据库中进行</span></span><br><span class="line">use ai_db;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- DDL 对数据表的操作</span></span><br><span class="line"><span class="comment">-- 创建数据表</span></span><br><span class="line"><span class="keyword">create table</span> category(cid <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">primary key</span> <span class="keyword">not null</span> ,cname <span class="type">varchar</span>(<span class="number">100</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查看当前数据库有哪些数据表</span></span><br><span class="line"><span class="keyword">show</span> tables;</span><br><span class="line"><span class="comment">-- 查看表结构</span></span><br><span class="line"><span class="keyword">desc</span> category;</span><br><span class="line"></span><br><span class="line">use mysql;</span><br><span class="line"><span class="keyword">show</span> tables;</span><br><span class="line"><span class="keyword">desc</span> plugin;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 添加字段, 需要注意这里添加的字段 字段的名字和sql的关键字冲突了,</span></span><br><span class="line"><span class="comment">-- 如果非要使用SQL的关键字作为字段名 需要添加 ``</span></span><br><span class="line"><span class="comment">-- alter table 表名 add `字段名字 字段类型;</span></span><br><span class="line"><span class="keyword">alter table</span> category <span class="keyword">add</span> `<span class="keyword">desc</span>` <span class="type">varchar</span>(<span class="number">20</span>);</span><br><span class="line"><span class="keyword">desc</span> category;</span><br><span class="line"></span><br><span class="line"><span class="keyword">alter table</span> category <span class="keyword">add</span> num <span class="type">varchar</span>(<span class="number">20</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 修改字段名字  alter table 表名 change 老字段名 新字段名字 类型;</span></span><br><span class="line"><span class="keyword">alter table</span> category change `<span class="keyword">desc</span>` description <span class="type">varchar</span>(<span class="number">20</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除字段 alter table 表名 drop 字段名;</span></span><br><span class="line"><span class="keyword">alter table</span> category <span class="keyword">drop</span> description;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- rename table 表名 to 新表名;</span></span><br><span class="line">rename <span class="keyword">table</span> category <span class="keyword">to</span> category2;</span><br><span class="line"><span class="keyword">show</span> tables;</span><br><span class="line"></span><br><span class="line">use ai_db;</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> ai_db.category;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-SQL语言的DML"><a href="#5-SQL语言的DML" class="headerlink" title="5 SQL语言的DML"></a>5 SQL语言的DML</h3><p>插入记录：格式：insert into 表 (字段1,字段2,字段3…) values(值1,值2,值3…),(值1,值2,值3…)…;</p>
+<p>更新记录：格式：update 表名 set 字段名&#x3D;值,字段名&#x3D;值,…;</p>
+<p>删除记录：delete from 表名 [where 条件];truncate category;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- DML</span></span><br><span class="line"><span class="comment">-- 插入数据 insert into</span></span><br><span class="line"><span class="keyword">insert into</span> category <span class="keyword">values</span> (<span class="string">&#x27;c001&#x27;</span>,<span class="string">&#x27;电器&#x27;</span>);</span><br><span class="line"><span class="keyword">insert into</span> category <span class="keyword">values</span> (<span class="string">&#x27;c002&#x27;</span>,<span class="string">&#x27;衣服&#x27;</span>);</span><br><span class="line"><span class="keyword">insert into</span> category2 <span class="keyword">values</span> (<span class="string">&#x27;c002&#x27;</span>,<span class="string">&#x27;衣服&#x27;</span>,<span class="number">3</span>);</span><br><span class="line"><span class="keyword">insert into</span> category2(cid,cname) <span class="keyword">values</span> (<span class="string">&#x27;c001&#x27;</span>,<span class="string">&#x27;电器&#x27;</span>);</span><br><span class="line"># <span class="keyword">insert into</span> category2(cname,num) <span class="keyword">values</span> (<span class="string">&#x27;衣服&#x27;</span>,<span class="number">3</span>);</span><br><span class="line"><span class="keyword">insert into</span> category2 (cid, cname) <span class="keyword">values</span>(<span class="string">&#x27;03&#x27;</span>,<span class="string">&#x27;化妆品&#x27;</span>),(<span class="string">&#x27;04&#x27;</span>,<span class="string">&#x27;书籍&#x27;</span>),(<span class="string">&#x27;05&#x27;</span>,<span class="keyword">null</span>);</span><br><span class="line"><span class="keyword">insert into</span> category2 <span class="keyword">values</span>(<span class="string">&#x27;06&#x27;</span>,<span class="string">&#x27;玩具&#x27;</span>,<span class="number">4</span>),(<span class="string">&#x27;07&#x27;</span>,<span class="string">&#x27;蔬菜&#x27;</span>,<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 修改数据</span></span><br><span class="line"><span class="comment">-- 格式：update 表名 set 字段名=值,字段名=值,... where 条件</span></span><br><span class="line"><span class="keyword">update</span> category2 <span class="keyword">set</span> cname <span class="operator">=</span> <span class="string">&#x27;家电&#x27;</span>;</span><br><span class="line"># <span class="keyword">where</span>;</span><br><span class="line"><span class="keyword">update</span> category2 <span class="keyword">set</span> cname<span class="operator">=</span><span class="string">&#x27;水果&#x27;</span> <span class="keyword">where</span> cid<span class="operator">=</span><span class="string">&#x27;c001&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> category2 <span class="keyword">where</span> cid<span class="operator">=</span><span class="string">&#x27;c002&#x27;</span>;</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> category;</span><br><span class="line"><span class="keyword">truncate</span> category2;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>update category2 set cname &#x3D; ‘家电’;</p>
+<p>delete from category;</p>
+<p>update 不带where条件会一次性修改 要修改字段的所有的记录</p>
+<p>delete from  不带where条件, 会删除所有记录</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/" rel="tag"># 数据处理与统计分析</a>
+              <a href="/tags/Mysql/" rel="tag"># Mysql</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/05/08/Python%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6%201e13311af3f58073ab5be03d64c886f5/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%201e93311af3f580cfbf8fdb2fe2326411/" rel="prev" title="数据结构与算法">
+                  <i class="fa fa-angle-left"></i> 数据结构与算法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/05/09/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%201ec3311af3f5801682d5fc9c085d70e9/Mysql%201ee3311af3f5800fb2c6fef12d3c36ad/" rel="next" title="Mysql">
+                  Mysql <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">cokeiz</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
