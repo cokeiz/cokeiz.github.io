@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="日期时间类型数据的处理 数据可视化:1.基于Matplotlib 没有交互效果 2. 基于Pandas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="日期时间类型数据的处理与数据可视化">
+<meta property="og:url" content="http://example.com/2025/05/13/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%201ec3311af3f5801682d5fc9c085d70e9/%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A4%84%E7%90%86%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%201f33311af3f5802b90facb7034b6b30f/index.html">
+<meta property="og:site_name" content="Coke&#39;s Blog">
+<meta property="og:description" content="日期时间类型数据的处理 数据可视化:1.基于Matplotlib 没有交互效果 2. 基于Pandas">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-05-13T06:55:00.000Z">
+<meta property="article:modified_time" content="2025-05-14T04:39:08.654Z">
+<meta property="article:author" content="cokeiz">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="数据处理与统计分析">
+<meta property="article:tag" content="jupyterlab">
+<meta property="article:tag" content="Pandas">
+<meta property="article:tag" content="Matplotlib">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/05/13/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%201ec3311af3f5801682d5fc9c085d70e9/%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A4%84%E7%90%86%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%201f33311af3f5802b90facb7034b6b30f/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/05/13/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%201ec3311af3f5801682d5fc9c085d70e9/%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A4%84%E7%90%86%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%201f33311af3f5802b90facb7034b6b30f/","path":"2025/05/13/数据处理与统计分析 1ec3311af3f5801682d5fc9c085d70e9/日期时间类型数据的处理与数据可视化 1f33311af3f5802b90facb7034b6b30f/","title":"日期时间类型数据的处理与数据可视化"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>日期时间类型数据的处理与数据可视化 | Coke's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Coke's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人生苦短，我用python</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A4%84%E7%90%86%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">日期时间类型数据的处理与数据可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%BF%9E%E5%B8%A6%E7%8E%87%E5%92%8C%E5%A4%8D%E8%B4%AD%E7%8E%87%E8%AE%A1%E7%AE%97"><span class="nav-number">1.1.</span> <span class="nav-text">1 连带率和复购率计算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E8%BF%9E%E5%B8%A6%E7%8E%87%E8%AE%A1%E7%AE%97"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 连带率计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%A4%8D%E8%B4%AD%E7%8E%87"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 复购率</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE"><span class="nav-number">1.2.</span> <span class="nav-text">2 日期时间类型数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B%E7%AE%80%E4%BB%8B"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 日期时间类型简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B4%A2%E5%BC%95"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 日期时间索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E7%94%9F%E6%88%90%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 生成日期时间序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E6%95%B0%E6%8D%AE%E7%9A%84%E5%B0%8F%E7%BB%93"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4 日期时间数据的小结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E7%BB%83%E4%B9%A0"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5 日期时间数据类型的练习</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">1.3.</span> <span class="nav-text">3 数据可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%8F%AF%E8%A7%86%E5%8C%96%E5%BA%93%E7%9A%84%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 可视化库的介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Matplotlib%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 Matplotlib可视化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Matplotlib-api%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.3.3.</span> <span class="nav-text">Matplotlib api介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#anscombe%E6%95%B0%E6%8D%AE%E9%9B%86%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">1.3.4.</span> <span class="nav-text">anscombe数据集可视化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Matplotlib-%E5%8D%95%E5%8F%98%E9%87%8F%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">1.3.5.</span> <span class="nav-text">Matplotlib 单变量可视化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Matplotlib%E5%8F%8C%E5%8F%98%E9%87%8F-%E5%A4%9A%E5%8F%98%E9%87%8F%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">1.3.6.</span> <span class="nav-text">Matplotlib双变量&#x2F;多变量可视化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Pandas%E7%BB%98%E5%9B%BE"><span class="nav-number">1.4.</span> <span class="nav-text">4 Pandas绘图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Pandas-%E5%8D%95%E5%8F%98%E9%87%8F%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 Pandas 单变量可视化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9F%B1%E7%8A%B6%E5%9B%BE"><span class="nav-number">1.4.2.</span> <span class="nav-text">1 柱状图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%8A%98%E7%BA%BF%E5%9B%BE%E5%92%8C%E9%9D%A2%E7%A7%AF%E5%9B%BE"><span class="nav-number">1.4.3.</span> <span class="nav-text">2 折线图和面积图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="nav-number">1.4.4.</span> <span class="nav-text">3 直方图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E9%A5%BC%E5%9B%BE"><span class="nav-number">1.4.5.</span> <span class="nav-text">4 饼图</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cokeiz</p>
+  <div class="site-description" itemprop="description">用此来记录我的生活和学习笔记以及学习过程</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/13/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%201ec3311af3f5801682d5fc9c085d70e9/%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A4%84%E7%90%86%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%201f33311af3f5802b90facb7034b6b30f/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cokeiz">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coke's Blog">
+      <meta itemprop="description" content="用此来记录我的生活和学习笔记以及学习过程">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="日期时间类型数据的处理与数据可视化 | Coke's Blog">
+      <meta itemprop="description" content="日期时间类型数据的处理 数据可视化:1.基于Matplotlib 没有交互效果 2. 基于Pandas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          日期时间类型数据的处理与数据可视化
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-05-13 14:55:00" itemprop="dateCreated datePublished" datetime="2025-05-13T14:55:00+08:00">2025-05-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-05-14 12:39:08" itemprop="dateModified" datetime="2025-05-14T12:39:08+08:00">2025-05-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/" itemprop="url" rel="index"><span itemprop="name">数据处理与统计分析</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">日期时间类型数据的处理 数据可视化:1.基于Matplotlib 没有交互效果 2. 基于Pandas</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="日期时间类型数据的处理与数据可视化"><a href="#日期时间类型数据的处理与数据可视化" class="headerlink" title="日期时间类型数据的处理与数据可视化"></a>日期时间类型数据的处理与数据可视化</h1><h2 id="1-连带率和复购率计算"><a href="#1-连带率和复购率计算" class="headerlink" title="1 连带率和复购率计算"></a>1 连带率和复购率计算</h2><h3 id="1-1-连带率计算"><a href="#1-1-连带率计算" class="headerlink" title="1.1 连带率计算"></a>1.1 连带率计算</h3><p>连带率的概念和为什么分析连带率</p>
+<ul>
+<li>连带率是指销售的件数和交易的次数相除后的数值</li>
+<li>反映的是顾客平均单次消费的产品件数</li>
+</ul>
+<p>为什么分析连带率</p>
+<ul>
+<li>连带率直接影响到客单价</li>
+<li>连带率反应运营质量</li>
+</ul>
+<p>连带率的计算</p>
+<ul>
+<li>连带率 &#x3D; 消费数量 &#x2F; 订单数量</li>
+</ul>
+<p>分析连带率的作用</p>
+<ul>
+<li>通过连带率分析可以反映出人、货、场几个角度的业务问题</li>
+</ul>
+<p><strong>计算连带率</strong></p>
+<ul>
+<li>只统计下单的数据</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">order_data = member_orders.query(<span class="string">&#x27;订单类型==&quot;下单&quot;&#x27;</span>)</span><br><span class="line"><span class="comment"># 去重, 订单编号相同的只保留一个</span></span><br><span class="line">order_count = order_data[[<span class="string">&#x27;年月&#x27;</span>,<span class="string">&#x27;地区编码&#x27;</span>,<span class="string">&#x27;订单号&#x27;</span>]].drop_duplicates()</span><br><span class="line"><span class="comment"># 数据透视表计算每个地区, 每个月份买了多少单</span></span><br><span class="line">order_count = order_count.pivot_table(index=<span class="string">&#x27;地区编码&#x27;</span>,columns=<span class="string">&#x27;年月&#x27;</span>,values=<span class="string">&#x27;订单号&#x27;</span>,aggfunc=<span class="string">&#x27;count&#x27;</span>)</span><br><span class="line">sale_count = order_data.pivot_table(index=<span class="string">&#x27;地区编码&#x27;</span>,columns=<span class="string">&#x27;年月&#x27;</span>,values=<span class="string">&#x27;消费数量&#x27;</span>,aggfunc=<span class="string">&#x27;sum&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>连带率计算</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sale_count/order_count</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-复购率"><a href="#1-2-复购率" class="headerlink" title="1.2 复购率"></a>1.2 复购率</h3><p>复购率的概念和复购率分析的作用</p>
+<ul>
+<li>复购率：指会员对该品牌产品或者服务的重复购买次数，重复购买率越多，则反应出会员对品牌的忠诚度就越高，反之则越低。</li>
+<li>计算复购率需要指定时间范围</li>
+</ul>
+<p>如何计算复购：</p>
+<ul>
+<li>会员消费次数一天之内只计算一次</li>
+<li>复购率 &#x3D; 一段时间内消费次数大于1次的人数 &#x2F; 总消费人数</li>
+</ul>
+<p>复购率分析的作用：通过复购率分析可以反映出运营状态</p>
+<ul>
+<li>先把一天内多次购买的用户, 只保留一条</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 订单日期, 卡号, 地区编码</span></span><br><span class="line">unique_date_order = order_data.drop_duplicates(subset=[<span class="string">&#x27;订单日期&#x27;</span>,<span class="string">&#x27;卡号&#x27;</span>])[[<span class="string">&#x27;订单日期&#x27;</span>, <span class="string">&#x27;卡号&#x27;</span>, <span class="string">&#x27;地区编码&#x27;</span>,<span class="string">&#x27;年月&#x27;</span>]]</span><br><span class="line">consume_count = unique_date_order.pivot_table(index=[<span class="string">&#x27;地区编码&#x27;</span>,<span class="string">&#x27;卡号&#x27;</span>],values=<span class="string">&#x27;订单日期&#x27;</span>,aggfunc=<span class="string">&#x27;count&#x27;</span>).reset_index()</span><br><span class="line">consume_count.rename(columns=&#123;<span class="string">&#x27;订单日期&#x27;</span>:<span class="string">&#x27;消费次数&#x27;</span>&#125;,inplace = <span class="literal">True</span>)</span><br><span class="line">consume_count[<span class="string">&#x27;是否复购&#x27;</span>] =consume_count[<span class="string">&#x27;消费次数&#x27;</span>]&gt;<span class="number">1</span></span><br><span class="line">result = consume_count.pivot_table(index=<span class="string">&#x27;地区编码&#x27;</span>,values=[<span class="string">&#x27;消费次数&#x27;</span>,<span class="string">&#x27;是否复购&#x27;</span>],aggfunc=&#123;<span class="string">&#x27;消费次数&#x27;</span>:<span class="string">&#x27;count&#x27;</span>,<span class="string">&#x27;是否复购&#x27;</span>:<span class="string">&#x27;sum&#x27;</span>&#125;)</span><br><span class="line">result.columns= [<span class="string">&#x27;复购人数&#x27;</span>,<span class="string">&#x27;消费人数&#x27;</span>]</span><br><span class="line">result[<span class="string">&#x27;复购率&#x27;</span>] = result[<span class="string">&#x27;复购人数&#x27;</span>]/result[<span class="string">&#x27;消费人数&#x27;</span>]</span><br><span class="line">result</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>把复购率计算过程封装成方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">repurchase_rate</span>(<span class="params">oder_data, start,end,col</span>):</span><br><span class="line">    <span class="comment"># 使用起始结束的日期筛选要计算的数据的范围</span></span><br><span class="line">    order_data1 = order_data[(oder_data[<span class="string">&#x27;年月&#x27;</span>]&lt;=end)&amp;(order_data[<span class="string">&#x27;年月&#x27;</span>]&gt;=start)]</span><br><span class="line">    <span class="comment"># 去重</span></span><br><span class="line">    unique_date_order = order_data1.drop_duplicates(subset=[<span class="string">&#x27;订单日期&#x27;</span>,<span class="string">&#x27;卡号&#x27;</span>])[[<span class="string">&#x27;订单日期&#x27;</span>, <span class="string">&#x27;卡号&#x27;</span>, <span class="string">&#x27;地区编码&#x27;</span>,<span class="string">&#x27;年月&#x27;</span>]]</span><br><span class="line">    consume_count = unique_date_order.pivot_table(index=[<span class="string">&#x27;地区编码&#x27;</span>,<span class="string">&#x27;卡号&#x27;</span>],values=<span class="string">&#x27;订单日期&#x27;</span>,aggfunc=<span class="string">&#x27;count&#x27;</span>).reset_index()</span><br><span class="line">    consume_count.rename(columns=&#123;<span class="string">&#x27;订单日期&#x27;</span>:<span class="string">&#x27;消费次数&#x27;</span>&#125;,inplace = <span class="literal">True</span>)</span><br><span class="line">    consume_count[<span class="string">&#x27;是否复购&#x27;</span>] =consume_count[<span class="string">&#x27;消费次数&#x27;</span>]&gt;<span class="number">1</span></span><br><span class="line">    result = consume_count.pivot_table(index=<span class="string">&#x27;地区编码&#x27;</span>,values=[<span class="string">&#x27;消费次数&#x27;</span>,<span class="string">&#x27;是否复购&#x27;</span>],aggfunc=&#123;<span class="string">&#x27;消费次数&#x27;</span>:<span class="string">&#x27;count&#x27;</span>,<span class="string">&#x27;是否复购&#x27;</span>:<span class="string">&#x27;sum&#x27;</span>&#125;)</span><br><span class="line">    result.columns= [<span class="string">&#x27;复购人数&#x27;</span>,<span class="string">&#x27;消费人数&#x27;</span>]</span><br><span class="line">    result[col+<span class="string">&#x27;复购率&#x27;</span>] = result[<span class="string">&#x27;复购人数&#x27;</span>]/result[<span class="string">&#x27;消费人数&#x27;</span>]</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>计算复购率环比</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 计算18年1月-18年12月 复购率</span></span><br><span class="line">result1 = repurchase_rate(order_data,<span class="number">201801</span>,<span class="number">201812</span>,<span class="string">&#x27;18年1月-18年12月&#x27;</span>)</span><br><span class="line"><span class="comment"># 计算18年2月-19年1月 复购率</span></span><br><span class="line">result2 = repurchase_rate(order_data,<span class="number">201802</span>,<span class="number">201901</span>,<span class="string">&#x27;18年2月-19年1月&#x27;</span>)</span><br><span class="line">result = pd.concat([result1.iloc[:,-<span class="number">1</span>],result2.iloc[:,-<span class="number">1</span>]],axis=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 计算复购率环比</span></span><br><span class="line">result.iloc[:,<span class="number">1</span>]/result.iloc[:,<span class="number">0</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-日期时间类型数据"><a href="#2-日期时间类型数据" class="headerlink" title="2 日期时间类型数据"></a>2 日期时间类型数据</h2><h3 id="2-1-日期时间类型简介"><a href="#2-1-日期时间类型简介" class="headerlink" title="2.1 日期时间类型简介"></a>2.1 日期时间类型简介</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">ebola = pd.read_csv(<span class="string">&#x27;data/country_timeseries.csv&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>pandas的日期时间类型默认是 datetime64[ns]</p>
+<p>在加载了上面的数据之后, 发现日期数据列是Object类型, 可以通过</p>
+<p>pd.to_datetime()转换成日期时间类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ebola[<span class="string">&#x27;date_dt&#x27;</span>] = pd.to_datetime(ebola[<span class="string">&#x27;Date&#x27;</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>也可以在读取数据的时候, 直接指定, 某一列解析成日期时间的格式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ebola = pd.read_csv(<span class="string">&#x27;data/country_timeseries.csv&#x27;</span>,parse_dates=[<span class="number">0</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>关于日期时间相关的还有TimeStamp 时间戳 这种类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pd.Timestamp(<span class="number">2023</span>,<span class="number">9</span>,<span class="number">1</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Timestamp(‘2023-09-01 00:00:00’)</p>
+</blockquote>
+<p>提取不同维度的日期信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">time_stamp = pd.to_datetime(<span class="string">&#x27;2023-09-01&#x27;</span>)</span><br><span class="line">time_stamp.year</span><br><span class="line">time_stamp.month</span><br><span class="line">time_stamp.day</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果是一列日期时间的数据ebola[‘Date’].dt.XXX</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ebola[<span class="string">&#x27;year&#x27;</span>]=ebola[<span class="string">&#x27;Date&#x27;</span>].dt.year</span><br><span class="line">ebola[<span class="string">&#x27;month&#x27;</span>] = ebola[<span class="string">&#x27;Date&#x27;</span>].dt.month</span><br><span class="line">ebola[<span class="string">&#x27;day&#x27;</span>] = ebola[<span class="string">&#x27;Date&#x27;</span>].dt.day</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-日期时间索引"><a href="#2-2-日期时间索引" class="headerlink" title="2.2 日期时间索引"></a>2.2 日期时间索引</h3><p>把日期时间类型的数据设置为索引, 优势就是方便进行时间范围的选择, 进行时间维度的切片操作会变得十分简单</p>
+<p>datetimeIndex</p>
+<ul>
+<li>把datetime64这个类型的数据设置为索引, 就是日期时间索引datetimeIndex</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tesla_stock = pd.read_csv(<span class="string">&#x27;data/TSLA.csv&#x27;</span>,parse_dates=[<span class="number">0</span>])</span><br><span class="line"><span class="comment"># 要筛选出2015年8月的股票信息, 如果Date是一列, 需要使用下面的布尔索引的写法(query写条件)</span></span><br><span class="line">tesla_stock[(tesla_stock[<span class="string">&#x27;Date&#x27;</span>].dt.year==<span class="number">2015</span>)&amp;(tesla_stock[<span class="string">&#x27;Date&#x27;</span>].dt.month==<span class="number">8</span>)]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>把’Date’设置为日期时间索引, 这类操作就会变得十分简单</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tesla_stock.set_index(<span class="string">&#x27;Date&#x27;</span>,inplace=<span class="literal">True</span>)</span><br><span class="line">tesla_stock.loc[<span class="string">&#x27;2015-08&#x27;</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>tesla_stock[‘2015-08’]  这种写法在2.0的版本已经被删除了</p>
+</blockquote>
+<p>timedeltaIndex</p>
+<ul>
+<li>把timedelta64这个类型的数据设置为索引, 就是时间差值索引timedeltaIndex</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tesla_stock.reset_index(inplace=<span class="literal">True</span>)</span><br><span class="line">tesla_stock[<span class="string">&#x27;ref_date&#x27;</span>] = tesla_stock[<span class="string">&#x27;Date&#x27;</span>]-tesla_stock[<span class="string">&#x27;Date&#x27;</span>].<span class="built_in">min</span>()</span><br><span class="line">tesla_stock.set_index(<span class="string">&#x27;ref_date&#x27;</span>,inplace=<span class="literal">True</span>)</span><br><span class="line">tesla_stock.loc[<span class="string">&#x27;0 days&#x27;</span>:<span class="string">&#x27;4 days&#x27;</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上面的切片操作, 4 days在数据中不存在, 依然能正确返回结果, 就是TimeDeltaIndex 优势</p>
+</blockquote>
+<h3 id="2-3-生成日期时间序列"><a href="#2-3-生成日期时间序列" class="headerlink" title="2.3 生成日期时间序列"></a>2.3 生成日期时间序列</h3><p>pd.date_range(‘起始时间’,’结束时间’, freq&#x3D; 生成时间序列的方式)</p>
+<p>freq可能取值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pd.date_range(<span class="string">&#x27;2023-08-01&#x27;</span>,<span class="string">&#x27;2023-10-30&#x27;</span>,freq=<span class="string">&#x27;B&#x27;</span>)</span><br><span class="line">pd.date_range(<span class="string">&#x27;2023-08-01&#x27;</span>,<span class="string">&#x27;2023-10-30&#x27;</span>,freq=<span class="string">&#x27;2B&#x27;</span>)<span class="comment"># 隔一个工作日获取一个工作日</span></span><br><span class="line">pd.date_range(<span class="string">&#x27;2023-08-01&#x27;</span>,<span class="string">&#x27;2023-10-30&#x27;</span>,freq=<span class="string">&#x27;WOM-1THU&#x27;</span>) <span class="comment"># 每个月的第一个星期4</span></span><br><span class="line"><span class="comment"># WOM week of month  THU Thursday</span></span><br><span class="line">pd.date_range(<span class="string">&#x27;2023-08-01&#x27;</span>,<span class="string">&#x27;2023-10-30&#x27;</span>,freq=<span class="string">&#x27;WOM-3FRI&#x27;</span>)  <span class="comment"># Friday 星期五</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-日期时间数据的小结"><a href="#2-4-日期时间数据的小结" class="headerlink" title="2.4 日期时间数据的小结"></a>2.4 日期时间数据的小结</h3><ul>
+<li><p>Pandas关于日期时间的数据 有如下几种数据类型</p>
+<ul>
+<li>TimeStamp 时间戳 就是一个时间点</li>
+<li>Datetime64 一列时间数据 →DatetimeIndex</li>
+<li>TimeDelta64 两列时间的差值 → TimeDeltaIndex</li>
+</ul>
+</li>
+<li><p>如果数据中包含了日期时间的数据, 并且后续计算&#x2F;数据的处理需要用到日期时间类型数据的特性需要把他转换成日期时间类型</p>
+<ul>
+<li>pd.to_datetime(一列数据)</li>
+<li>pd.read_csv(parse_dates&#x3D; [列名&#x2F;序号]) 加载的时候直接进行转换</li>
+</ul>
+</li>
+<li><p>还可以通过Pandas提供的API生成日期时间的序列</p>
+<p>  pd.date_range(‘起始时间’,’结束时间’, freq&#x3D; 生成时间序列的方式)</p>
+</li>
+<li><p>在特征处理&#x2F;数据处理 看见日期时间类型数据需要马上反映出通过这一列数据,可以做出很多列特征来<br>  df[‘日期列’].dt.year&#x2F;df[‘日期列’].dt.month&#x2F;df[‘日期列’].dt.day&#x2F;df[‘日期列’].dt.weekday</p>
+<ul>
+<li>如果想快速的对日期进行切片&#x2F;范围选取的操作, 可以把它转换成日期时间索引</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-5-日期时间数据类型的练习"><a href="#2-5-日期时间数据类型的练习" class="headerlink" title="2.5 日期时间数据类型的练习"></a>2.5 日期时间数据类型的练习</h3><p>把日期时间设置为Index 行索引之后, 可以使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">crime.between_time(&#x27;2:00&#x27;,&#x27;5:00&#x27;,include_start=False)</span><br><span class="line">crime.at_time(&#x27;5:43&#x27;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>between_time 在两个时刻的范围内</p>
+<p>at_time 在某个具体的时刻</p>
+</blockquote>
+<p>crime.resample(‘W’) 将数据按周进行分组 , 分组之后可以接聚合函数, 类似于groupby之后的聚合</p>
+<p>crime.resample(‘M’) 将数据按月份进行分组,分组之后可以接聚合函数, 类似于groupby之后的聚合,</p>
+<p>crime.resample(‘Q’) 将数据按季度进行分组, 分组之后可以接聚合函数, 类似于groupby之后的聚合</p>
+<p>如果需要对DatetimeIndex这个类型的数据进行切片操作, 建议先排序, 再切片, 效率更高</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入一个账单csv数据</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">order = pd.read_csv(<span class="string">&#x27;data/订单.csv&#x27;</span>)</span><br><span class="line">order.info()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入日期时间函数，将数据转换</span></span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line">order[<span class="string">&#x27;订单日期&#x27;</span>] = pd.to_datetime(order[<span class="string">&#x27;订单日期&#x27;</span>])</span><br><span class="line">order.info()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取年份、月份、星期几，添加为新列。</span></span><br><span class="line">order[<span class="string">&#x27;year&#x27;</span>] =  order[<span class="string">&#x27;订单日期&#x27;</span>].dt.year</span><br><span class="line">order[<span class="string">&#x27;month&#x27;</span>] =  order[<span class="string">&#x27;订单日期&#x27;</span>].dt.month</span><br><span class="line">order[<span class="string">&#x27;week_day&#x27;</span>] =  order[<span class="string">&#x27;订单日期&#x27;</span>].dt.weekday</span><br><span class="line">order</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按月统计总销售额。</span></span><br><span class="line">order_sell = order.pivot_table(index = <span class="string">&#x27;month&#x27;</span>,values=<span class="string">&#x27;订单金额&#x27;</span>,aggfunc=<span class="string">&#x27;sum&#x27;</span>)</span><br><span class="line">order_sell</span><br><span class="line">order_sell.columns = [<span class="string">&#x27;销售额&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 把订单日期设为索引，选出 2 月份的数据。</span></span><br><span class="line">order = order.set_index([<span class="string">&#x27;订单日期&#x27;</span>])</span><br><span class="line">order.loc[<span class="string">&#x27;2024-02&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算每两笔订单之间的时间差（提示：用 .diff()）。这会自动生成一个新列，表示当前订单日期与上一个订单日期之间的时间差（类型是 timedelta）。</span></span><br><span class="line">order[<span class="string">&quot;日期间隔&quot;</span>] = order.index.to_series().diff() <span class="comment"># 注意：此时不能直接使用，将索引转换成 Series，再计算每一行与上一行的差值。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 用柱状图画出每月销售额</span></span><br><span class="line">order_sell.plot.bar(figsize = (<span class="number">16</span>,<span class="number">8</span>),xlabel = <span class="string">&#x27;month&#x27;</span>,ylabel = <span class="string">&#x27;order_sell&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-数据可视化"><a href="#3-数据可视化" class="headerlink" title="3 数据可视化"></a>3 数据可视化</h2><h3 id="3-1-可视化库的介绍"><a href="#3-1-可视化库的介绍" class="headerlink" title="3.1 可视化库的介绍"></a>3.1 可视化库的介绍</h3><p>基于Matplotlib 绘制静态图形</p>
+<ul>
+<li>pandas</li>
+<li>seaborn</li>
+</ul>
+<p>基于JS (javaScript)</p>
+<ul>
+<li>pyecharts&#x2F;echarts</li>
+<li>plotly</li>
+</ul>
+<h3 id="3-2-Matplotlib可视化"><a href="#3-2-Matplotlib可视化" class="headerlink" title="3.2 Matplotlib可视化"></a>3.2 Matplotlib可视化</h3><h3 id="Matplotlib-api介绍"><a href="#Matplotlib-api介绍" class="headerlink" title="Matplotlib api介绍"></a>Matplotlib api介绍</h3><ul>
+<li>准备数据</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用Matplotlib需要导入pyplot</span></span><br><span class="line"><span class="comment"># Matplotlib.pyplot包含一系列与绘图函数的相关函数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 准备数据</span></span><br><span class="line">x = [-<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>]  <span class="comment"># 所有坐标点的 x坐标</span></span><br><span class="line">y = [<span class="number">10</span>,<span class="number">2</span>,<span class="number">5</span>]  <span class="comment"># 所有坐标点的 y坐标</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>绘制折线图 使用plt. 这一套API</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建绘图区域</span></span><br><span class="line">plt.figure(figsize=(<span class="number">12</span>,<span class="number">5</span>))</span><br><span class="line"><span class="comment"># 画图</span></span><br><span class="line">plt.plot(x,y)</span><br><span class="line">plt.grid(<span class="literal">True</span>)  <span class="comment"># 添加网格线</span></span><br><span class="line">plt.xlim(-<span class="number">3</span>,<span class="number">7</span>)</span><br><span class="line">plt.ylim(<span class="number">2</span>,<span class="number">11</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;x axis&#x27;</span>,size=<span class="number">20</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;y axis&#x27;</span>,size=<span class="number">10</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;折线图&#x27;</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>绘制折线图,使用面向对象这一套API</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fig,ax = plt.subplots(figsize=(<span class="number">12</span>,<span class="number">5</span>)) <span class="comment"># ax 坐标系</span></span><br><span class="line"><span class="comment"># 在坐标系中 画图</span></span><br><span class="line">ax.plot(x,y) <span class="comment"># 调用ax 坐标系的绘图方法</span></span><br><span class="line">ax.set_xlim(-<span class="number">3</span>,<span class="number">7</span>) <span class="comment"># 调用ax 坐标系的设置方法</span></span><br><span class="line">ax.set_ylim(<span class="number">2</span>,<span class="number">11</span>)</span><br><span class="line">ax.set_xlabel(<span class="string">&#x27;x axis&#x27;</span>,size=<span class="number">20</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&#x27;y axis&#x27;</span>,size=<span class="number">10</span>)</span><br><span class="line">ax.set_title(<span class="string">&#x27;折线图&#x27;</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="anscombe数据集可视化"><a href="#anscombe数据集可视化" class="headerlink" title="anscombe数据集可视化"></a>anscombe数据集可视化</h3><p>数据集介绍通</p>
+<ul>
+<li>过Anscombe数据集说明数据可视化的重要性</li>
+<li>Anscombe数据集由英国统计学家Frank Anscombe创建</li>
+<li>数据集包含4组数据，每组数据包含两个连续变量。</li>
+<li>每组数据的平均值、方差、相关性基本相同，但是当它们可视化后，就会发现每组数据的模式明显不同。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">anscombe = pd.read_csv(<span class="string">&#x27;data/anscombe.csv&#x27;</span>)</span><br><span class="line">anscombe.dataset.value_counts()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>4组数据, 放在一个数据集中, 分别用I, II, III , IV 加以区分</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">anscombe.groupby(<span class="string">&#x27;dataset&#x27;</span>).describe().T</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>describe()查看数据的查看数据的分布情况</p>
+<p>发现每组数据中, x, y 的分布情况基本相同, 从均值, 极值和几个4分位数上看, 这几组数据貌似分布差不多</p>
+</blockquote>
+<p>数据可视化</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 上面的数据一共可以分成4分 I II III IV  我们把这四份数据分别可视化, 画4张小图, 放到一个画布中</span></span><br><span class="line">fig = plt.figure(figsize=(<span class="number">16</span>,<span class="number">8</span>))</span><br><span class="line"><span class="comment"># 在画布中 设置一个两行两列的框, 第一个框 对应axes1</span></span><br><span class="line">axes1 = fig.add_subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 在画布中 设置一个两行两列的框, 第二个框 对应axes2</span></span><br><span class="line">axes2 = fig.add_subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line"><span class="comment"># 在画布中 设置一个两行两列的框, 第三个框 对应axes3</span></span><br><span class="line">axes3 = fig.add_subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line"><span class="comment"># 在画布中 设置一个两行两列的框, 第四个框 对应axes4</span></span><br><span class="line">axes4 = fig.add_subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>)</span><br><span class="line">axes1.scatter(anscombe[anscombe[<span class="string">&#x27;dataset&#x27;</span>]==<span class="string">&#x27;I&#x27;</span>][<span class="string">&#x27;x&#x27;</span>],anscombe[anscombe[<span class="string">&#x27;dataset&#x27;</span>]==<span class="string">&#x27;I&#x27;</span>][<span class="string">&#x27;y&#x27;</span>])</span><br><span class="line">axes2.scatter(anscombe[anscombe[<span class="string">&#x27;dataset&#x27;</span>]==<span class="string">&#x27;II&#x27;</span>][<span class="string">&#x27;x&#x27;</span>],anscombe[anscombe[<span class="string">&#x27;dataset&#x27;</span>]==<span class="string">&#x27;II&#x27;</span>][<span class="string">&#x27;y&#x27;</span>])</span><br><span class="line">axes3.scatter(anscombe[anscombe[<span class="string">&#x27;dataset&#x27;</span>]==<span class="string">&#x27;III&#x27;</span>][<span class="string">&#x27;x&#x27;</span>],anscombe[anscombe[<span class="string">&#x27;dataset&#x27;</span>]==<span class="string">&#x27;III&#x27;</span>][<span class="string">&#x27;y&#x27;</span>])</span><br><span class="line">axes4.scatter(anscombe[anscombe[<span class="string">&#x27;dataset&#x27;</span>]==<span class="string">&#x27;IV&#x27;</span>][<span class="string">&#x27;x&#x27;</span>],anscombe[anscombe[<span class="string">&#x27;dataset&#x27;</span>]==<span class="string">&#x27;IV&#x27;</span>][<span class="string">&#x27;y&#x27;</span>])</span><br><span class="line">plt.show()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Matplotlib-单变量可视化"><a href="#Matplotlib-单变量可视化" class="headerlink" title="Matplotlib 单变量可视化"></a>Matplotlib 单变量可视化</h3><p>直方图 直方图能反应一个变量数据的分布情况</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tips = pd.read_csv(<span class="string">&#x27;data/tips.csv&#x27;</span>)</span><br><span class="line"><span class="comment"># 创建绘图区域</span></span><br><span class="line">plt.figure(figsize=(<span class="number">16</span>,<span class="number">8</span>))</span><br><span class="line"><span class="comment"># 绘制账单金额的直方图, 指定把账单金额均匀分成10组</span></span><br><span class="line">plt.hist(tips[<span class="string">&#x27;total_bill&#x27;</span>],bins=<span class="number">10</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;总账单金额的分布情况&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;账单金额&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;出现次数&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>import numpy as np<br>np.linspace(3.07,50.81,11)  # bins &#x3D; 10 相当于在账单的最小值, 和最大值范围内生成了11值的等差数列</p>
+<p>11个值划分10个区间, 直方图的高度, 就是落到每个区间中的数据的条目数</p>
+</blockquote>
+<h3 id="Matplotlib双变量-多变量可视化"><a href="#Matplotlib双变量-多变量可视化" class="headerlink" title="Matplotlib双变量&#x2F;多变量可视化"></a>Matplotlib双变量&#x2F;多变量可视化</h3><p>双变量（bivariate)指两个变量</p>
+<ul>
+<li>散点图用于表示一个连续变量随另一个连续变量的变化所呈现的大致趋势</li>
+</ul>
+<p>了解账单金额和消费之间的关系可以绘制散点图</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">12</span>,<span class="number">8</span>))</span><br><span class="line">plt.scatter(tips[<span class="string">&#x27;total_bill&#x27;</span>],tips[<span class="string">&#x27;tip&#x27;</span>])</span><br><span class="line">plt.xlabel(<span class="string">&#x27;账单金额&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;小费金额&#x27;</span>)</span><br><span class="line">plt.grid(<span class="literal">True</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>多变量可视化</p>
+<ul>
+<li>在散点图的基础上, 可以通过颜色来区分不同的类别</li>
+<li>散点的大小也可以用来表示一个变量</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加一列, 用来区分不同性别显示的颜色</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">recode_sex</span>(<span class="params">sex</span>):</span><br><span class="line">    <span class="keyword">if</span> sex==<span class="string">&#x27;Female&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;r&#x27;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;b&#x27;</span></span><br><span class="line">tips[<span class="string">&#x27;sex_color&#x27;</span>] = tips[<span class="string">&#x27;sex&#x27;</span>].apply(recode_sex)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>绘制散点图</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">12</span>,<span class="number">8</span>))</span><br><span class="line">plt.scatter(tips[<span class="string">&#x27;total_bill&#x27;</span>],tips[<span class="string">&#x27;tip&#x27;</span>],c=tips[<span class="string">&#x27;sex_color&#x27;</span>],s = tips[<span class="string">&#x27;size&#x27;</span>]*<span class="number">10</span>,alpha=<span class="number">0.5</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;账单金额&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;小费金额&#x27;</span>)</span><br><span class="line">plt.legend(tips[<span class="string">&#x27;sex&#x27;</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>c&#x3D;tips[‘sex_color’]  区分颜色</p>
+<p>s &#x3D; tips[‘size’]*10  区分大小</p>
+<p>alpha&#x3D;0.5 设置点的透明度</p>
+</blockquote>
+<h2 id="4-Pandas绘图"><a href="#4-Pandas绘图" class="headerlink" title="4 Pandas绘图"></a>4 Pandas绘图</h2><h3 id="4-1-Pandas-单变量可视化"><a href="#4-1-Pandas-单变量可视化" class="headerlink" title="4.1 Pandas 单变量可视化"></a>4.1 Pandas 单变量可视化</h3><p>如果是类别型</p>
+<ul>
+<li>柱状</li>
+<li>饼图 (类别相对较少 5-6个 或者更少), 所有的类别加起来是1个整体</li>
+</ul>
+<p>如果是数值型</p>
+<ul>
+<li>看变化趋势 折线 plot.line()</li>
+<li>看分布直方plot.hist()<ul>
+<li>绘制直方图的时候,需要注意, 如果数据分布不均匀(倾斜的数据, 有取值数量较少的极大, 极小值) 这个时候如果不做数据的处理, 直接绘制直方图, 不能反映出数据的分布来, 只能得到一个柱子<ul>
+<li>可以把极值单独取出来讨论</li>
+<li>把去掉极值的部分再绘制直方图</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">reviews = pd.read_csv(<span class="string">&#x27;data/winemag-data_first150k.csv&#x27;</span>,index_col=<span class="number">0</span>)</span><br><span class="line">reviews.info()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reviews.describe()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reviews.describe(include=<span class="built_in">object</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-柱状图"><a href="#1-柱状图" class="headerlink" title="1 柱状图"></a>1 柱状图</h3><ul>
+<li>统计葡萄酒出产种类最多的10个省份</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> ticker</span><br><span class="line">fig,ax = plt.subplots(figsize=(<span class="number">16</span>,<span class="number">8</span>))</span><br><span class="line"><span class="comment"># 设置坐标轴为百分比形式展示 decimals=1表示百分比的小数位数为1</span></span><br><span class="line">ax.yaxis.set_major_formatter(ticker.PercentFormatter(xmax=<span class="number">1</span>,decimals=<span class="number">1</span>))</span><br><span class="line">kwargs = <span class="built_in">dict</span>(fontsize=<span class="number">20</span>,color = [<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;orange&#x27;</span>,<span class="string">&#x27;g&#x27;</span>,<span class="string">&#x27;r&#x27;</span>,<span class="string">&#x27;purple&#x27;</span>,<span class="string">&#x27;brown&#x27;</span>,<span class="string">&#x27;pink&#x27;</span>,<span class="string">&#x27;gray&#x27;</span>,<span class="string">&#x27;cyan&#x27;</span>,<span class="string">&#x27;y&#x27;</span>])</span><br><span class="line">reviews[<span class="string">&#x27;province&#x27;</span>].value_counts(<span class="number">1</span>).head(<span class="number">10</span>).plot.bar(**kwargs)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-折线图和面积图"><a href="#2-折线图和面积图" class="headerlink" title="2 折线图和面积图"></a>2 折线图和面积图</h3><ul>
+<li>绘制分数的分布情况</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reviews[<span class="string">&#x27;points&#x27;</span>].value_counts().sort_index().plot.line(grid=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 为了方便绘图 sort_index 对行索引进行排序</span></span><br><span class="line">reviews[<span class="string">&#x27;points&#x27;</span>].value_counts().sort_index().plot.area(grid=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-直方图"><a href="#3-直方图" class="headerlink" title="3 直方图"></a>3 直方图</h3><ul>
+<li>绘制直方图的时候需要注意, 如果数据是有偏的, 需要先将数据进行处理<ul>
+<li>这里葡萄酒的价格分布并不均匀, 高于500元的葡萄酒种类很少, 先从数据中截取价格&lt;150的再绘制直方图</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reviews[reviews[<span class="string">&#x27;price&#x27;</span>]&lt;<span class="number">150</span>][<span class="string">&#x27;price&#x27;</span>].plot.hist(bins=<span class="number">15</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># quantile 计算分位数</span></span><br><span class="line">reviews[<span class="string">&#x27;price&#x27;</span>].quantile(<span class="number">0.9994</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>500.0</p>
+</blockquote>
+<h3 id="4-饼图"><a href="#4-饼图" class="headerlink" title="4 饼图"></a>4 饼图</h3><ul>
+<li>饼图适合统计类别数量不多, 组合起来是1的数据的可视化</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reviews[<span class="string">&#x27;province&#x27;</span>].value_counts().head(<span class="number">10</span>).plot.pie()</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/" rel="tag"># 数据处理与统计分析</a>
+              <a href="/tags/jupyterlab/" rel="tag"># jupyterlab</a>
+              <a href="/tags/Pandas/" rel="tag"># Pandas</a>
+              <a href="/tags/Matplotlib/" rel="tag"># Matplotlib</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/05/12/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%201ec3311af3f5801682d5fc9c085d70e9/%E6%95%B0%E6%8D%AE%E5%88%86%E7%BB%84%EF%BC%8C%E6%95%B0%E6%8D%AE%E9%80%8F%E8%A7%86%E8%A1%A8%201f23311af3f580968f22c45ac21a4e74/" rel="prev" title="数据分组，数据透视表">
+                  <i class="fa fa-angle-left"></i> 数据分组，数据透视表
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">cokeiz</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

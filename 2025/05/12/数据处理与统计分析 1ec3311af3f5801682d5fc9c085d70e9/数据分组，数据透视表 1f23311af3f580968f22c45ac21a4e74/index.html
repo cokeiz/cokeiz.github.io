@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="数据分组与数据透视表，以及各自的函数使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据分组，数据透视表">
+<meta property="og:url" content="http://example.com/2025/05/12/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%201ec3311af3f5801682d5fc9c085d70e9/%E6%95%B0%E6%8D%AE%E5%88%86%E7%BB%84%EF%BC%8C%E6%95%B0%E6%8D%AE%E9%80%8F%E8%A7%86%E8%A1%A8%201f23311af3f580968f22c45ac21a4e74/index.html">
+<meta property="og:site_name" content="Coke&#39;s Blog">
+<meta property="og:description" content="数据分组与数据透视表，以及各自的函数使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-05-12T11:37:00.000Z">
+<meta property="article:modified_time" content="2025-05-14T04:33:56.452Z">
+<meta property="article:author" content="cokeiz">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="数据处理与统计分析">
+<meta property="article:tag" content="jupyterlab">
+<meta property="article:tag" content="Pandas">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/05/12/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%201ec3311af3f5801682d5fc9c085d70e9/%E6%95%B0%E6%8D%AE%E5%88%86%E7%BB%84%EF%BC%8C%E6%95%B0%E6%8D%AE%E9%80%8F%E8%A7%86%E8%A1%A8%201f23311af3f580968f22c45ac21a4e74/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/05/12/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%201ec3311af3f5801682d5fc9c085d70e9/%E6%95%B0%E6%8D%AE%E5%88%86%E7%BB%84%EF%BC%8C%E6%95%B0%E6%8D%AE%E9%80%8F%E8%A7%86%E8%A1%A8%201f23311af3f580968f22c45ac21a4e74/","path":"2025/05/12/数据处理与统计分析 1ec3311af3f5801682d5fc9c085d70e9/数据分组，数据透视表 1f23311af3f580968f22c45ac21a4e74/","title":"数据分组，数据透视表"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>数据分组，数据透视表 | Coke's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Coke's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人生苦短，我用python</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E7%BB%84%EF%BC%8C%E6%95%B0%E6%8D%AE%E9%80%8F%E8%A7%86%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">数据分组，数据透视表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%90%91%E9%87%8F%E5%8C%96%E5%87%BD%E6%95%B0-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.0.1.</span> <span class="nav-text">1 向量化函数&#x2F;lambda表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%95%B0%E6%8D%AE%E5%88%86%E7%BB%84"><span class="nav-number">1.0.2.</span> <span class="nav-text">2 数据分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%88%86%E7%BB%84%E8%81%9A%E5%90%88"><span class="nav-number">1.0.3.</span> <span class="nav-text">2.1 分组聚合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%88%86%E7%BB%84%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.0.4.</span> <span class="nav-text">2.2 分组转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E5%88%86%E7%BB%84%E8%BD%AC%E6%8D%A2%E7%BB%83%E4%B9%A0"><span class="nav-number">1.0.5.</span> <span class="nav-text">2.3 分组转换练习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E5%88%86%E7%BB%84%E8%BF%87%E6%BB%A4"><span class="nav-number">1.0.6.</span> <span class="nav-text">2.4 分组过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-DataFrameGroupby%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.0.7.</span> <span class="nav-text">2.5 DataFrameGroupby对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BC%9A%E5%91%98%E5%88%86%E6%9E%90%E5%92%8C%E6%95%B0%E6%8D%AE%E9%80%8F%E8%A7%86%E8%A1%A8"><span class="nav-number">1.0.8.</span> <span class="nav-text">3 会员分析和数据透视表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E4%BC%9A%E5%91%98%E5%A2%9E%E9%87%8F%E5%92%8C%E5%AD%98%E9%87%8F%E5%88%86%E6%9E%90"><span class="nav-number">1.0.9.</span> <span class="nav-text">3.1 会员增量和存量分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%9F%E8%AE%A1%E6%AF%8F%E4%B8%AA%E6%9C%88%E4%BB%BD%E6%96%B0%E5%A2%9E%E4%BC%9A%E5%91%98%E6%95%B0%E9%87%8F"><span class="nav-number">1.0.10.</span> <span class="nav-text">统计每个月份新增会员数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%9F%E8%AE%A1%E6%9C%88%E5%A2%9E%E9%87%8F%E4%BC%9A%E5%91%98%E4%B8%AD%E7%9A%84%E4%BC%9A%E5%91%98%E7%AD%89%E7%BA%A7%E5%88%86%E5%B8%83"><span class="nav-number">1.0.11.</span> <span class="nav-text">统计月增量会员中的会员等级分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E7%AD%89%E7%BA%A7%E5%88%86%E5%B8%83"><span class="nav-number">1.0.12.</span> <span class="nav-text">整体等级分布</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cokeiz</p>
+  <div class="site-description" itemprop="description">用此来记录我的生活和学习笔记以及学习过程</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/12/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%201ec3311af3f5801682d5fc9c085d70e9/%E6%95%B0%E6%8D%AE%E5%88%86%E7%BB%84%EF%BC%8C%E6%95%B0%E6%8D%AE%E9%80%8F%E8%A7%86%E8%A1%A8%201f23311af3f580968f22c45ac21a4e74/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cokeiz">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coke's Blog">
+      <meta itemprop="description" content="用此来记录我的生活和学习笔记以及学习过程">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="数据分组，数据透视表 | Coke's Blog">
+      <meta itemprop="description" content="数据分组与数据透视表，以及各自的函数使用">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据分组，数据透视表
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-05-12 19:37:00" itemprop="dateCreated datePublished" datetime="2025-05-12T19:37:00+08:00">2025-05-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-05-14 12:33:56" itemprop="dateModified" datetime="2025-05-14T12:33:56+08:00">2025-05-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/" itemprop="url" rel="index"><span itemprop="name">数据处理与统计分析</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">数据分组与数据透视表，以及各自的函数使用</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="数据分组，数据透视表"><a href="#数据分组，数据透视表" class="headerlink" title="数据分组，数据透视表"></a>数据分组，数据透视表</h1><h3 id="1-向量化函数-lambda表达式"><a href="#1-向量化函数-lambda表达式" class="headerlink" title="1 向量化函数&#x2F;lambda表达式"></a>1 向量化函数&#x2F;lambda表达式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">avg_test2</span>(<span class="params">x,y</span>):</span><br><span class="line">    <span class="keyword">if</span> x==<span class="number">20</span>:</span><br><span class="line">        <span class="keyword">return</span> np.NaN</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> (x+y)/<span class="number">2</span></span><br><span class="line">avg_test2(df[<span class="string">&#x27;a&#x27;</span>],df[<span class="string">&#x27;b&#x27;</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上面的方法调用之所以报错, 就是因为if 需要传入的是 一个True&#x2F;False , 但是我们传入的是一个 True&#x2F;False 组成的Series  此时if 不能做出判断, 抛出了错误</p>
+<p>想让上面的代码正常的执行, 我们需要把 Series里的每一个值遍历的传递给if 做多次判断, 此时必须要自己写for循环, 可以通过 np.vectorize(avg_test2) 这种方式, 把这个方法变成一个向量化的方法(会遍历每一个值(分量)多次调用这个方法)</p>
+</blockquote>
+<p>np.vectorize 两种用法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">avg_test2</span>(<span class="params">x,y</span>):</span><br><span class="line">    <span class="keyword">if</span> x==<span class="number">20</span>:</span><br><span class="line">        <span class="keyword">return</span> np.NaN</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> (x+y)/<span class="number">2</span></span><br><span class="line">avg_vec = np.vectorize(avg_test2)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>还有一种通过装饰器来调用的方式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@np.vectorize</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">avg_test3</span>(<span class="params">x,y</span>):</span><br><span class="line">    <span class="keyword">if</span> x==<span class="number">20</span>:</span><br><span class="line">        <span class="keyword">return</span> np.NaN</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> (x+y)/<span class="number">2</span></span><br><span class="line">avg_test3(df[<span class="string">&#x27;a&#x27;</span>],df[<span class="string">&#x27;b&#x27;</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>lambda表达式</strong></p>
+<p>使用apply的时候, 如果自定义处理逻辑比较简单, 一行代码就可以搞定, 可以使用lambda, 不用再def 一个起名字的函数, 使用lambda 创建一个匿名函数就可以了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.apply(<span class="keyword">lambda</span> x:x.isnull().<span class="built_in">sum</span>())</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-数据分组"><a href="#2-数据分组" class="headerlink" title="2 数据分组"></a>2 数据分组</h3><h3 id="2-1-分组聚合"><a href="#2-1-分组聚合" class="headerlink" title="2.1 分组聚合"></a>2.1 分组聚合</h3><p>df.groupby(‘分组字段’)[‘聚合字段’].describe()</p>
+<p>分组之后想调用非Pandas的聚合函数, 需要使用agg&#x2F;aggregate 方法, 聚合函数可以自定义</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">df.groupby(<span class="string">&#x27;continent&#x27;</span>)[<span class="string">&#x27;lifeExp&#x27;</span>].aggregate(np.mean)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>自定义聚合函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">my_mean_diff</span>(<span class="params">s,global_mean</span>):</span><br><span class="line">    <span class="keyword">return</span> s.mean() - global_mean</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">global_mean = df[<span class="string">&#x27;lifeExp&#x27;</span>].mean()</span><br><span class="line">df.groupby(<span class="string">&#x27;continent&#x27;</span>)[<span class="string">&#x27;lifeExp&#x27;</span>].agg(my_mean_diff,global_mean = global_mean)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不同字段按照不同方式进行聚合</span></span><br><span class="line">df.groupby(<span class="string">&#x27;year&#x27;</span>).agg(&#123;<span class="string">&#x27;lifeExp&#x27;</span>:<span class="string">&#x27;mean&#x27;</span>,<span class="string">&#x27;pop&#x27;</span>:<span class="string">&#x27;median&#x27;</span>,<span class="string">&#x27;gdpPercap&#x27;</span>:<span class="string">&#x27;max&#x27;</span>&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-分组转换"><a href="#2-2-分组转换" class="headerlink" title="2.2 分组转换"></a>2.2 分组转换</h3><p>分组计算均值来填充缺失值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加载小费数据集</span></span><br><span class="line">tips = pd.read_csv(<span class="string">&#x27;data/tips.csv&#x27;</span>)</span><br><span class="line"><span class="comment">#random_state 具体的取值没有啥意义, 但是把这个值固定下来, 多次运行采样的代码, 采样出来的数据是一样的</span></span><br><span class="line">tips_10 = tips.sample(<span class="number">10</span>,random_state=<span class="number">42</span>) <span class="comment"># sample采样</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">tips_10.loc[np.random.permutation(tips_10.index)[:<span class="number">4</span>],<span class="string">&#x27;tip&#x27;</span>] = np.NAN</span><br><span class="line"><span class="comment">#np.random.permutation(tips_10.index) 将index随机打乱 随机找了4条数据 给tip复制为nan</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建自定义函数, 用来填充缺失值</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">fillna_mean</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="comment"># 计算每组的小费平均值 利用均值填充缺失值</span></span><br><span class="line">    <span class="keyword">return</span> x.fillna(x.mean())</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tips_10.groupby(<span class="string">&#x27;sex&#x27;</span>)[<span class="string">&#x27;tip&#x27;</span>].transform(fillna_mean)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>不同性别填充的缺失值, 是各自性别的小费平均值</p>
+</blockquote>
+<p>分组转换跟SQL中的窗口函数中的聚合函数作用一样</p>
+<ul>
+<li>可以把每一条数据和这个数据所属的组的一个聚合值在放在一起, 可以根据需求进行相应计算</li>
+</ul>
+<h3 id="2-3-分组转换练习"><a href="#2-3-分组转换练习" class="headerlink" title="2.3 分组转换练习"></a>2.3 分组转换练习</h3><ul>
+<li>加载减重数据 数据中包含了Bob和Amy 从1月到4月 每周的体重数据(每个月4周, 一共32条数据)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">weight_loss = pd.read_csv(<span class="string">&#x27;data/weight_loss.csv&#x27;</span>)</span><br><span class="line">weight_loss</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>query 类似于SQL 的where 条件 query 需要传入的是条件对应的字符串, 如果条件中还有字符串, 需要用不同类型的引号进行区分</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">weight_loss.query(<span class="string">&quot;Month==&#x27;Jan&#x27;&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>从数据中查询出月份是 ‘Jan’ 一月份的数据</p>
+</blockquote>
+<p>我们要使用分组转换来计算Bob和Amy每个月的减重效果 (每个月每周的体重减去当月第一周的体重), 定义一个自定义函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 计算减重的比例</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">find_perc_loss</span>(<span class="params">s</span>):</span><br><span class="line">    <span class="comment"># s.iloc[0] 每个月的第一周, 体重</span></span><br><span class="line">    <span class="keyword">return</span> (s.iloc[<span class="number">0</span>]-s)/s.iloc[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用Query 查询出一月份 bob的数据, 测试一下自定义函数</span></span><br><span class="line">bob_jan = weight_loss.query(<span class="string">&quot;Name==&#x27;Bob&#x27; and Month==&#x27;Jan&#x27;&quot;</span>)</span><br><span class="line">find_perc_loss(bob_jan[<span class="string">&#x27;Weight&#x27;</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>按姓名和月份分组转换，计算Bob和Amy每个月中每周的减重效果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">weight_loss[<span class="string">&#x27;减重比例&#x27;</span>] = weight_loss.groupby([<span class="string">&#x27;Name&#x27;</span>,<span class="string">&#x27;Month&#x27;</span>])[<span class="string">&#x27;Weight&#x27;</span>].transform(find_perc_loss)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>提取第4周的数据用于比较， 看谁的减重效果更明显</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">week4_result = weight_loss.query(<span class="string">&#x27;Week==&quot;Week 4&quot;&#x27;</span>)[[<span class="string">&#x27;Name&#x27;</span>,<span class="string">&#x27;Month&#x27;</span>,<span class="string">&#x27;减重比例&#x27;</span>]]</span><br><span class="line">week4_amy = week4_result[week4_result[<span class="string">&#x27;Name&#x27;</span>]==<span class="string">&#x27;Amy&#x27;</span>]</span><br><span class="line">week4_bob = week4_result.query(<span class="string">&quot;Name==&#x27;Bob&#x27;&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>比较第四周的减重数据</p>
+<ul>
+<li>将月份设置为行索引, 方便两份数据进行计算</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">week4_bob[[<span class="string">&#x27;Month&#x27;</span>,<span class="string">&#x27;减重比例&#x27;</span>]].set_index(<span class="string">&#x27;Month&#x27;</span>) - week4_amy[[<span class="string">&#x27;Month&#x27;</span>,<span class="string">&#x27;减重比例&#x27;</span>]].set_index(<span class="string">&#x27;Month&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>从数据中, 看出bob-amy 三个月的数据是负值, 说明amy的减重比例高于bob, amy减重效果更好</p>
+<ul>
+<li>练习2</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="comment"># 创建一个DateFrame</span></span><br><span class="line">df = pd.DataFrame(&#123;</span><br><span class="line">    <span class="string">&#x27;部门&#x27;</span>: [<span class="string">&#x27;销售&#x27;</span>, <span class="string">&#x27;销售&#x27;</span>, <span class="string">&#x27;技术&#x27;</span>, <span class="string">&#x27;技术&#x27;</span>, <span class="string">&#x27;人事&#x27;</span>, <span class="string">&#x27;销售&#x27;</span>, <span class="string">&#x27;技术&#x27;</span>],</span><br><span class="line">    <span class="string">&#x27;姓名&#x27;</span>: [<span class="string">&#x27;张三&#x27;</span>, <span class="string">&#x27;李四&#x27;</span>, <span class="string">&#x27;王五&#x27;</span>, <span class="string">&#x27;赵六&#x27;</span>, <span class="string">&#x27;孙七&#x27;</span>, <span class="string">&#x27;周八&#x27;</span>, <span class="string">&#x27;钱九&#x27;</span>],</span><br><span class="line">    <span class="string">&#x27;工资&#x27;</span>: [<span class="number">5000</span>, <span class="number">5500</span>, <span class="number">7000</span>, <span class="number">7200</span>, <span class="number">4500</span>, <span class="number">5300</span>, <span class="number">7100</span>]</span><br><span class="line">&#125;)</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>分组转换</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新增一列平均工资</span></span><br><span class="line">df.loc[:,<span class="string">&#x27;平均工资&#x27;</span>] = df.groupby([<span class="string">&quot;部门&quot;</span>])[<span class="string">&#x27;工资&#x27;</span>].transform(<span class="keyword">lambda</span> x:x.mean())</span><br><span class="line">df</span><br><span class="line"><span class="comment"># 注意： lambda后面的mean()函数要加括号，否则就是调用函数本身</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-分组过滤"><a href="#2-4-分组过滤" class="headerlink" title="2.4 分组过滤"></a>2.4 分组过滤</h3><ul>
+<li>groupby()分组之后, 接filter方法, 传入一个返回True&#x2F;False 的方法, 当数据传入这个方法中,返回True的会被留下, 返回False的会被过滤掉</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tips.groupby(<span class="string">&#x27;size&#x27;</span>).<span class="built_in">filter</span>(<span class="keyword">lambda</span> x:x[<span class="string">&#x27;size&#x27;</span>].count()&gt;<span class="number">5</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用就餐人数进行分组, 过滤掉条目数少于5条的组</p>
+</blockquote>
+<h3 id="2-5-DataFrameGroupby对象"><a href="#2-5-DataFrameGroupby对象" class="headerlink" title="2.5 DataFrameGroupby对象"></a>2.5 DataFrameGroupby对象</h3><p>调用了groupby方法之后, 就会返回一个DataFrameGroupby对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grouped = tips_10.groupby(<span class="string">&#x27;sex&#x27;</span>)</span><br><span class="line">grouped.groups</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>{‘Female’: [198, 124, 101], ‘Male’: [24, 6, 153, 211, 176, 192, 9]}</p>
+<p>返回了分组的情况 {‘组中的取值’:[取值对应的条目索引列表]}</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grouped.get_group(<span class="string">&#x27;Female&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>可以获取每组中的数据 (DataFrame)</p>
+<p>可以遍历这个DataFrameGroupby对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> group <span class="keyword">in</span> grouped:</span><br><span class="line">    <span class="comment"># print(group)</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">type</span>(group[<span class="number">1</span>]))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>每个group 都是一个元组 (分组的值, 这一组对应数据的DataFrame)</p>
+</blockquote>
+<p>多字段分组的时候, 返回的是复合索引(MultiIndex)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">result = tips_10.groupby([<span class="string">&#x27;sex&#x27;</span>,<span class="string">&#x27;time&#x27;</span>]).mean()</span><br><span class="line">result.loc[(<span class="string">&#x27;Female&#x27;</span>, <span class="string">&#x27;Dinner&#x27;</span>)] <span class="comment"># 获取复合索引后, 需要使用索引对应的元组才能获取到对应行的数据</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>可以把复合索引变成普通的索引</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">result.reset_index()</span><br><span class="line">tips_10.groupby([<span class="string">&#x27;sex&#x27;</span>,<span class="string">&#x27;time&#x27;</span>],as_index = <span class="literal">False</span>).mean()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>练习2</li>
+<li>分组过滤</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从练习2中的数据找出工资大于6000的部门的人</span></span><br><span class="line"><span class="comment"># 方法1，groupby()分组之后, 接filter方法, 传入一个返回True/False 的方法, 当数据传入这个方法中,返回True的会被留下, 返回False的会被过滤掉</span></span><br><span class="line">df4 = df.groupby([<span class="string">&quot;部门&quot;</span>]).<span class="built_in">filter</span>(<span class="keyword">lambda</span> x:x[<span class="string">&quot;平均工资&quot;</span>].iloc[<span class="number">0</span>] &gt; <span class="number">6000</span>)</span><br><span class="line">df4</span><br><span class="line"><span class="comment"># 方法2，直接使用query方法计算</span></span><br><span class="line">df.query(<span class="string">&quot;平均工资 &gt; 6000&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-会员分析和数据透视表"><a href="#3-会员分析和数据透视表" class="headerlink" title="3 会员分析和数据透视表"></a>3 会员分析和数据透视表</h3><p>分析会员运营的基本情况从量的角度分析会员运营情况：</p>
+<p>① 整体会员运营情况（存量，增量）</p>
+<p>② 不同渠道（线上，线下）的会员运营情况</p>
+<p>③ 线下业务，拆解到不同的地区、门店会员运营情况</p>
+<p>从质的角度分析会员运营情况：</p>
+<p>① 会销比 会员消费占整体消费的占比</p>
+<p>② 连带率 是不是每次购买商品的时候, 都购买一件以上</p>
+<p>③ 复购率 是不是买了之后, 又来买</p>
+<h3 id="3-1-会员增量和存量分析"><a href="#3-1-会员增量和存量分析" class="headerlink" title="3.1 会员增量和存量分析"></a>3.1 会员增量和存量分析</h3><p>df.pivot_table(index&#x3D; , columns &#x3D; , values&#x3D;, aggfunc&#x3D;)</p>
+<ul>
+<li>index：行索引，传入原始数据的列名, 这一列中每一个取值会作为透视表结果的一个行索引</li>
+<li>columns：列索引，传入原始数据的列名, 这一列中每一个取值会作为透视表结果的一列</li>
+<li>values: 要做聚合操作的列名</li>
+<li>aggfunc：聚合函数</li>
+</ul>
+<p>累计求和</p>
+<p>df[列名].cumsum()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">customer_info = pd.read_excel(<span class="string">&#x27;data/会员信息查询.xlsx&#x27;</span>)</span><br><span class="line">customer_info.head()</span><br><span class="line">customer_info.info()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>&lt;class ‘pandas.core.frame.DataFrame’&gt;<br>RangeIndex: 952714 entries, 0 to 952713<br>Data columns (total 12 columns):</p>
+<p>Column  Non-Null Count   Dtype</p>
+<hr>
+<p>0   会员卡号    952714 non-null  object</p>
+<p>1   会员等级    952714 non-null  object</p>
+<p>2   会员来源    952714 non-null  object</p>
+<p>3   注册时间    952714 non-null  datetime64[ns]<br>4   所属店铺编码  952714 non-null  object</p>
+<p>5   门店店员编码  253828 non-null  object</p>
+<p>6   省份      264801 non-null  object</p>
+<p>7   城市      264758 non-null  object</p>
+<p>8   性别      952714 non-null  object</p>
+<p>9   生日      785590 non-null  object</p>
+<p>10  年齡      952705 non-null  float64</p>
+<p>11  生命级别    952714 non-null  object</p>
+<p>dtypes: datetime64<a target="_blank" rel="noopener" href="https://www.notion.so/1">ns</a>, float64(1), object(10)<br>memory usage: 87.2+ MB</p>
+</blockquote>
+<ul>
+<li>将注册年月转换成 年月的形式展示<ul>
+<li>strftime 时间类型格式化</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">customer_info.loc[:,<span class="string">&#x27;注册年月&#x27;</span>] = customer_info[<span class="string">&#x27;注册时间&#x27;</span>].apply(<span class="keyword">lambda</span> x:x.strftime(<span class="string">&#x27;%Y-%m&#x27;</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="统计每个月份新增会员数量"><a href="#统计每个月份新增会员数量" class="headerlink" title="统计每个月份新增会员数量"></a>统计每个月份新增会员数量</h3><p>(注册年月分组, 对会员卡号计数)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">month_count = customer_info.groupby(<span class="string">&#x27;注册年月&#x27;</span>)[[<span class="string">&#x27;会员卡号&#x27;</span>]].count()</span><br><span class="line"><span class="comment"># 修改列名</span></span><br><span class="line">month_count.columns = [<span class="string">&#x27;月增量&#x27;</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>绘制会员增量曲线</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.rcParams[<span class="string">&#x27;font.sans-serif&#x27;</span>] = [<span class="string">&#x27;SimHei&#x27;</span>] <span class="comment"># 正常显示汉字</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="literal">False</span> <span class="comment"># 正常显示负号</span></span><br><span class="line">customer_info.groupby(<span class="string">&#x27;注册年月&#x27;</span>)[<span class="string">&#x27;会员卡号&#x27;</span>].count()[<span class="number">1</span>:].plot(figsize=(<span class="number">16</span>,<span class="number">8</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>通过透视表计算月增量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># index 在透视表结果中, 哪一列数据作为行索引  columns 在透视表结果中, 哪一列数据作为列名 values 对哪一个字段进行统计 aggfunc 聚合方式</span></span><br><span class="line">customer_info.pivot_table(index=<span class="string">&#x27;注册年月&#x27;</span>,values=<span class="string">&#x27;会员卡号&#x27;</span>,aggfunc=<span class="string">&#x27;count&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>对月增量字段累计求和计算月存量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">month_count.loc[:,<span class="string">&#x27;会员存量&#x27;</span>]=month_count[<span class="string">&#x27;月增量&#x27;</span>].cumsum()</span><br><span class="line"><span class="comment"># 注意：调用.cumsum()需要加()，否则调用本身</span></span><br></pre></td></tr></table></figure>
+
+<p>将月增量和月存量进行可视化</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">month_count[<span class="string">&#x27;月增量&#x27;</span>].plot(figsize=(<span class="number">16</span>,<span class="number">8</span>),color = <span class="string">&#x27;red&#x27;</span>,secondary_y = <span class="literal">True</span>)</span><br><span class="line">month_count[<span class="string">&#x27;会员存量&#x27;</span>].plot(kind = <span class="string">&#x27;bar&#x27;</span>,figsize=(<span class="number">16</span>,<span class="number">8</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="统计月增量会员中的会员等级分布"><a href="#统计月增量会员中的会员等级分布" class="headerlink" title="统计月增量会员中的会员等级分布"></a><strong>统计月增量会员中的会员等级分布</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">customer_info.groupby([<span class="string">&#x27;注册年月&#x27;</span>,<span class="string">&#x27;会员等级&#x27;</span>])[<span class="string">&#x27;会员卡号&#x27;</span>].count().unstack()</span><br><span class="line">member_level = customer_info.pivot_table(index=<span class="string">&#x27;注册年月&#x27;</span>,columns=<span class="string">&#x27;会员等级&#x27;</span>,values=<span class="string">&#x27;会员卡号&#x27;</span>,aggfunc=<span class="string">&#x27;count&#x27;</span>)</span><br><span class="line">member_level = member_level[<span class="number">1</span>:]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>可视化</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">fig,ax1 = plt.subplots(figsize=(<span class="number">20</span>,<span class="number">8</span>))</span><br><span class="line">ax2 = ax1.twinx() <span class="comment"># 通过ax1 创建了一个共享x轴的坐标系 ax2</span></span><br><span class="line"><span class="comment"># plt.subplots 创建了一个绘图区域 fig 和坐标系 ax1   grid=True 添加网格线  xlabel/ylabel x轴y轴 起名  legend 图例</span></span><br><span class="line">member_level[[<span class="string">&#x27;白银会员&#x27;</span>,<span class="string">&#x27;黄金会员&#x27;</span>]].plot.bar(ax=ax1,grid=<span class="literal">True</span>,xlabel=<span class="string">&#x27;年月&#x27;</span>,ylabel=<span class="string">&#x27;白银黄金&#x27;</span>,legend= <span class="literal">True</span>)</span><br><span class="line">member_level[[<span class="string">&#x27;铂金会员&#x27;</span>,<span class="string">&#x27;钻石会员&#x27;</span>]].plot(ax=ax2,color=[<span class="string">&#x27;red&#x27;</span>,<span class="string">&#x27;gray&#x27;</span>],ylabel=<span class="string">&#x27;铂金钻石&#x27;</span>,legend= <span class="literal">True</span>)</span><br><span class="line"><span class="comment"># 把ax2 坐标系 图例显示的地方调整到左上角</span></span><br><span class="line">ax2.legend(loc=<span class="string">&#x27;upper left&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;会员增量等级分布&#x27;</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>计算不同等级会员占比</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">member_level.loc[:,<span class="string">&#x27;总计&#x27;</span>] = member_level.<span class="built_in">sum</span>(axis=<span class="number">1</span>)</span><br><span class="line">member_level.loc[:,<span class="string">&#x27;白银会员占比&#x27;</span>] = member_level[<span class="string">&#x27;白银会员&#x27;</span>]/member_level[<span class="string">&#x27;总计&#x27;</span>]</span><br><span class="line">member_level.loc[:,<span class="string">&#x27;黄金会员占比&#x27;</span>] = member_level[<span class="string">&#x27;黄金会员&#x27;</span>]/member_level[<span class="string">&#x27;总计&#x27;</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>黄金白银会员占比可视化</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">member_level[[<span class="string">&#x27;白银会员占比&#x27;</span>,<span class="string">&#x27;黄金会员占比&#x27;</span>]].plot(color=[<span class="string">&#x27;r&#x27;</span>,<span class="string">&#x27;g&#x27;</span>],ylabel=<span class="string">&#x27;占比&#x27;</span>,figsize=(<span class="number">16</span>,<span class="number">8</span>),grid=<span class="literal">True</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="整体等级分布"><a href="#整体等级分布" class="headerlink" title="整体等级分布"></a>整体等级分布</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法一，groupby + count 后，分组列（会员等级）会变成索引，不再是普通列。</span></span><br><span class="line">ratio = customer_info.groupby(<span class="string">&#x27;会员等级&#x27;</span>)[[<span class="string">&#x27;会员卡号&#x27;</span>]].count()</span><br><span class="line"><span class="comment"># 方法二</span></span><br><span class="line">customer_info.pivot_table(index=<span class="string">&#x27;会员等级&#x27;</span>,values=<span class="string">&#x27;会员卡号&#x27;</span>,aggfunc=<span class="string">&#x27;count&#x27;</span>)</span><br><span class="line">ratio.columns=[<span class="string">&#x27;会员数&#x27;</span>]</span><br><span class="line">ratio[<span class="string">&#x27;占比&#x27;</span>] = ratio[<span class="string">&#x27;会员数&#x27;</span>]/ratio[<span class="string">&#x27;会员数&#x27;</span>].<span class="built_in">sum</span>()</span><br><span class="line">ratio</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>绘制饼图</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ratio.loc[[<span class="string">&#x27;白银会员&#x27;</span>,<span class="string">&#x27;铂金会员&#x27;</span>,<span class="string">&#x27;黄金会员&#x27;</span>,<span class="string">&#x27;钻石会员&#x27;</span>],<span class="string">&#x27;占比&#x27;</span>].plot.pie(figsize=(<span class="number">16</span>,<span class="number">8</span>),autopct=<span class="string">&#x27;%.2f%%&#x27;</span>,fontsize=<span class="number">16</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>由于铂金会员&#x2F;钻石会员占比较低, 绘图之前先调整在数据中的顺序, 让铂金会员和钻石会员在数据中不要挨着</p>
+<p>pie 绘制饼图</p>
+<p>autopct 控制显示饼图的占比数据图例   .2f% 表示保留两位有效数字</p>
+<p>fontsize &#x3D; 16 控制字体大小</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/" rel="tag"># 数据处理与统计分析</a>
+              <a href="/tags/jupyterlab/" rel="tag"># jupyterlab</a>
+              <a href="/tags/Pandas/" rel="tag"># Pandas</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/05/11/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%201ec3311af3f5801682d5fc9c085d70e9/DateFrame%E5%BA%94%E7%94%A8%E5%92%8C%E6%93%8D%E4%BD%9C/" rel="prev" title="DateFrame应用和操作">
+                  <i class="fa fa-angle-left"></i> DateFrame应用和操作
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/05/13/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%201ec3311af3f5801682d5fc9c085d70e9/%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A4%84%E7%90%86%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%201f33311af3f5802b90facb7034b6b30f/" rel="next" title="日期时间类型数据的处理与数据可视化">
+                  日期时间类型数据的处理与数据可视化 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">cokeiz</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
